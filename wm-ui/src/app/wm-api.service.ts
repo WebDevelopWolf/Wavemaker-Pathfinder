@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
+import { Http, Response, Headers } from "@angular/http";
 
 @Injectable()
 export class WmApiService {
@@ -31,6 +31,17 @@ export class WmApiService {
         .toPromise()
         .then(this.extractData)
         .catch(this.handleError);
+  }
+
+  // Basic Post W/ Body
+  postService(url: string, body: any): Promise<any> {
+    console.log(body);
+    let headers = new Headers({'Content-Type': 'application/json'});
+    return this._http
+      .post(this._baseUrl + url, body, {headers: headers})
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
   }
 
 }
