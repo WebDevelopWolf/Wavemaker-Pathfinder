@@ -5,7 +5,7 @@ import { Http, Response, Headers } from "@angular/http";
 export class WmApiService {
 
   private _baseUrl = "http://localhost:58061/";
-  tempuser = "Liane";
+  tempuser = "WebDevelopWolf";
   modules: any;
 
   constructor(private _http: Http) {

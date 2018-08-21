@@ -35,13 +35,14 @@ namespace wm_api.Models
 
     #region Unit of work
 
-    public interface IMyDbContext : System.IDisposable
+    public interface IWmDataContext : System.IDisposable
     {
         System.Data.Entity.DbSet<Badge> Badges { get; set; } // Badges
         System.Data.Entity.DbSet<Challenge> Challenges { get; set; } // Challenges
         System.Data.Entity.DbSet<FeedbackPost> FeedbackPosts { get; set; } // FeedbackPosts
         System.Data.Entity.DbSet<FeedbackPostResponse> FeedbackPostResponses { get; set; } // FeedbackPostResponse
         System.Data.Entity.DbSet<FeedbackResponse> FeedbackResponses { get; set; } // FeedbackResponse
+        System.Data.Entity.DbSet<GlobalUserLeaderboard> GlobalUserLeaderboards { get; set; } // GlobalUserLeaderboard
         System.Data.Entity.DbSet<Journey> Journeys { get; set; } // Journeys
         System.Data.Entity.DbSet<Lesson> Lessons { get; set; } // Lessons
         System.Data.Entity.DbSet<LessonResource> LessonResources { get; set; } // LessonResources
@@ -54,6 +55,7 @@ namespace wm_api.Models
         System.Data.Entity.DbSet<UserBadge> UserBadges { get; set; } // UserBadges
         System.Data.Entity.DbSet<UserChallenge> UserChallenges { get; set; } // UserChallenges
         System.Data.Entity.DbSet<UserJourney> UserJourneys { get; set; } // UserJourneys
+        System.Data.Entity.DbSet<XpLevel> XpLevels { get; set; } // XpLevels
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();
@@ -74,13 +76,14 @@ namespace wm_api.Models
     #region Database context
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
-    public class MyDbContext : System.Data.Entity.DbContext, IMyDbContext
+    public class WmDataContext : System.Data.Entity.DbContext, IWmDataContext
     {
         public System.Data.Entity.DbSet<Badge> Badges { get; set; } // Badges
         public System.Data.Entity.DbSet<Challenge> Challenges { get; set; } // Challenges
         public System.Data.Entity.DbSet<FeedbackPost> FeedbackPosts { get; set; } // FeedbackPosts
         public System.Data.Entity.DbSet<FeedbackPostResponse> FeedbackPostResponses { get; set; } // FeedbackPostResponse
         public System.Data.Entity.DbSet<FeedbackResponse> FeedbackResponses { get; set; } // FeedbackResponse
+        public System.Data.Entity.DbSet<GlobalUserLeaderboard> GlobalUserLeaderboards { get; set; } // GlobalUserLeaderboard
         public System.Data.Entity.DbSet<Journey> Journeys { get; set; } // Journeys
         public System.Data.Entity.DbSet<Lesson> Lessons { get; set; } // Lessons
         public System.Data.Entity.DbSet<LessonResource> LessonResources { get; set; } // LessonResources
@@ -93,33 +96,34 @@ namespace wm_api.Models
         public System.Data.Entity.DbSet<UserBadge> UserBadges { get; set; } // UserBadges
         public System.Data.Entity.DbSet<UserChallenge> UserChallenges { get; set; } // UserChallenges
         public System.Data.Entity.DbSet<UserJourney> UserJourneys { get; set; } // UserJourneys
+        public System.Data.Entity.DbSet<XpLevel> XpLevels { get; set; } // XpLevels
 
-        static MyDbContext()
+        static WmDataContext()
         {
-            System.Data.Entity.Database.SetInitializer<MyDbContext>(null);
+            System.Data.Entity.Database.SetInitializer<WmDataContext>(null);
         }
 
-        public MyDbContext()
+        public WmDataContext()
             : base("Name=PathV1Context")
         {
         }
 
-        public MyDbContext(string connectionString)
+        public WmDataContext(string connectionString)
             : base(connectionString)
         {
         }
 
-        public MyDbContext(string connectionString, System.Data.Entity.Infrastructure.DbCompiledModel model)
+        public WmDataContext(string connectionString, System.Data.Entity.Infrastructure.DbCompiledModel model)
             : base(connectionString, model)
         {
         }
 
-        public MyDbContext(System.Data.Common.DbConnection existingConnection, bool contextOwnsConnection)
+        public WmDataContext(System.Data.Common.DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection)
         {
         }
 
-        public MyDbContext(System.Data.Common.DbConnection existingConnection, System.Data.Entity.Infrastructure.DbCompiledModel model, bool contextOwnsConnection)
+        public WmDataContext(System.Data.Common.DbConnection existingConnection, System.Data.Entity.Infrastructure.DbCompiledModel model, bool contextOwnsConnection)
             : base(existingConnection, model, contextOwnsConnection)
         {
         }
@@ -147,6 +151,7 @@ namespace wm_api.Models
             modelBuilder.Configurations.Add(new FeedbackPostConfiguration());
             modelBuilder.Configurations.Add(new FeedbackPostResponseConfiguration());
             modelBuilder.Configurations.Add(new FeedbackResponseConfiguration());
+            modelBuilder.Configurations.Add(new GlobalUserLeaderboardConfiguration());
             modelBuilder.Configurations.Add(new JourneyConfiguration());
             modelBuilder.Configurations.Add(new LessonConfiguration());
             modelBuilder.Configurations.Add(new LessonResourceConfiguration());
@@ -159,6 +164,7 @@ namespace wm_api.Models
             modelBuilder.Configurations.Add(new UserBadgeConfiguration());
             modelBuilder.Configurations.Add(new UserChallengeConfiguration());
             modelBuilder.Configurations.Add(new UserJourneyConfiguration());
+            modelBuilder.Configurations.Add(new XpLevelConfiguration());
         }
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
@@ -168,6 +174,7 @@ namespace wm_api.Models
             modelBuilder.Configurations.Add(new FeedbackPostConfiguration(schema));
             modelBuilder.Configurations.Add(new FeedbackPostResponseConfiguration(schema));
             modelBuilder.Configurations.Add(new FeedbackResponseConfiguration(schema));
+            modelBuilder.Configurations.Add(new GlobalUserLeaderboardConfiguration(schema));
             modelBuilder.Configurations.Add(new JourneyConfiguration(schema));
             modelBuilder.Configurations.Add(new LessonConfiguration(schema));
             modelBuilder.Configurations.Add(new LessonResourceConfiguration(schema));
@@ -180,6 +187,7 @@ namespace wm_api.Models
             modelBuilder.Configurations.Add(new UserBadgeConfiguration(schema));
             modelBuilder.Configurations.Add(new UserChallengeConfiguration(schema));
             modelBuilder.Configurations.Add(new UserJourneyConfiguration(schema));
+            modelBuilder.Configurations.Add(new XpLevelConfiguration(schema));
             return modelBuilder;
         }
     }
@@ -187,11 +195,11 @@ namespace wm_api.Models
 
     #region Database context factory
 
-    public class MyDbContextFactory : System.Data.Entity.Infrastructure.IDbContextFactory<MyDbContext>
+    public class WmDataContextFactory : System.Data.Entity.Infrastructure.IDbContextFactory<WmDataContext>
     {
-        public MyDbContext Create()
+        public WmDataContext Create()
         {
-            return new MyDbContext();
+            return new WmDataContext();
         }
     }
 
@@ -200,13 +208,14 @@ namespace wm_api.Models
     #region Fake Database context
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
-    public class FakeMyDbContext : IMyDbContext
+    public class FakeWmDataContext : IWmDataContext
     {
         public System.Data.Entity.DbSet<Badge> Badges { get; set; }
         public System.Data.Entity.DbSet<Challenge> Challenges { get; set; }
         public System.Data.Entity.DbSet<FeedbackPost> FeedbackPosts { get; set; }
         public System.Data.Entity.DbSet<FeedbackPostResponse> FeedbackPostResponses { get; set; }
         public System.Data.Entity.DbSet<FeedbackResponse> FeedbackResponses { get; set; }
+        public System.Data.Entity.DbSet<GlobalUserLeaderboard> GlobalUserLeaderboards { get; set; }
         public System.Data.Entity.DbSet<Journey> Journeys { get; set; }
         public System.Data.Entity.DbSet<Lesson> Lessons { get; set; }
         public System.Data.Entity.DbSet<LessonResource> LessonResources { get; set; }
@@ -219,8 +228,9 @@ namespace wm_api.Models
         public System.Data.Entity.DbSet<UserBadge> UserBadges { get; set; }
         public System.Data.Entity.DbSet<UserChallenge> UserChallenges { get; set; }
         public System.Data.Entity.DbSet<UserJourney> UserJourneys { get; set; }
+        public System.Data.Entity.DbSet<XpLevel> XpLevels { get; set; }
 
-        public FakeMyDbContext()
+        public FakeWmDataContext()
         {
             _changeTracker = null;
             _configuration = null;
@@ -231,6 +241,7 @@ namespace wm_api.Models
             FeedbackPosts = new FakeDbSet<FeedbackPost>("PostId");
             FeedbackPostResponses = new FakeDbSet<FeedbackPostResponse>("FeedbackPostResponseId");
             FeedbackResponses = new FakeDbSet<FeedbackResponse>("FeedbackResponseId");
+            GlobalUserLeaderboards = new FakeDbSet<GlobalUserLeaderboard>("Username", "UserFullName", "UserLevel", "UserXp");
             Journeys = new FakeDbSet<Journey>("JourneyId");
             Lessons = new FakeDbSet<Lesson>("LessonId");
             LessonResources = new FakeDbSet<LessonResource>("LessonResourceId");
@@ -243,6 +254,7 @@ namespace wm_api.Models
             UserBadges = new FakeDbSet<UserBadge>("UserBadgeId");
             UserChallenges = new FakeDbSet<UserChallenge>("UserChallengeId");
             UserJourneys = new FakeDbSet<UserJourney>("UserJourneyId");
+            XpLevels = new FakeDbSet<XpLevel>("XpLevelId");
         }
 
         public int SaveChangesCount { get; private set; }
@@ -621,6 +633,16 @@ namespace wm_api.Models
         public string FeedbackText { get; set; } // FeedbackText (length: 150)
     }
 
+    // GlobalUserLeaderboard
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class GlobalUserLeaderboard
+    {
+        public string Username { get; set; } // Username (Primary key) (length: 50)
+        public string UserFullName { get; set; } // UserFullName (Primary key) (length: 50)
+        public int UserLevel { get; set; } // UserLevel (Primary key)
+        public int UserXp { get; set; } // UserXp (Primary key)
+    }
+
     // Journeys
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class Journey
@@ -727,6 +749,7 @@ namespace wm_api.Models
         public string UserInspirations { get; set; } // UserInspirations
         public int UserXp { get; set; } // UserXp
         public int UserLevel { get; set; } // UserLevel
+        public string UserFullName { get; set; } // UserFullName (length: 50)
     }
 
     // UserBadges
@@ -756,6 +779,15 @@ namespace wm_api.Models
         public System.Guid UserId { get; set; } // UserId
         public System.Guid JourneyId { get; set; } // JourneyId
         public System.Guid LessonProgressId { get; set; } // LessonProgressId
+    }
+
+    // XpLevels
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class XpLevel
+    {
+        public System.Guid XpLevelId { get; set; } // XpLevelId (Primary key)
+        public int UserLevel { get; set; } // UserLevel
+        public int UserXp { get; set; } // UserXp
     }
 
     #endregion
@@ -864,6 +896,27 @@ namespace wm_api.Models
 
             Property(x => x.FeedbackResponseId).HasColumnName(@"FeedbackResponseId").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.FeedbackText).HasColumnName(@"FeedbackText").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(150);
+        }
+    }
+
+    // GlobalUserLeaderboard
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class GlobalUserLeaderboardConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<GlobalUserLeaderboard>
+    {
+        public GlobalUserLeaderboardConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public GlobalUserLeaderboardConfiguration(string schema)
+        {
+            ToTable("GlobalUserLeaderboard", schema);
+            HasKey(x => new { x.Username, x.UserFullName, x.UserLevel, x.UserXp });
+
+            Property(x => x.Username).HasColumnName(@"Username").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.UserFullName).HasColumnName(@"UserFullName").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.UserLevel).HasColumnName(@"UserLevel").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.UserXp).HasColumnName(@"UserXp").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
         }
     }
 
@@ -1071,6 +1124,7 @@ namespace wm_api.Models
             Property(x => x.UserInspirations).HasColumnName(@"UserInspirations").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
             Property(x => x.UserXp).HasColumnName(@"UserXp").HasColumnType("int").IsRequired();
             Property(x => x.UserLevel).HasColumnName(@"UserLevel").HasColumnType("int").IsRequired();
+            Property(x => x.UserFullName).HasColumnName(@"UserFullName").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
         }
     }
 
@@ -1133,6 +1187,26 @@ namespace wm_api.Models
             Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("uniqueidentifier").IsRequired();
             Property(x => x.JourneyId).HasColumnName(@"JourneyId").HasColumnType("uniqueidentifier").IsRequired();
             Property(x => x.LessonProgressId).HasColumnName(@"LessonProgressId").HasColumnType("uniqueidentifier").IsRequired();
+        }
+    }
+
+    // XpLevels
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class XpLevelConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<XpLevel>
+    {
+        public XpLevelConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public XpLevelConfiguration(string schema)
+        {
+            ToTable("XpLevels", schema);
+            HasKey(x => x.XpLevelId);
+
+            Property(x => x.XpLevelId).HasColumnName(@"XpLevelId").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.UserLevel).HasColumnName(@"UserLevel").HasColumnType("int").IsRequired();
+            Property(x => x.UserXp).HasColumnName(@"UserXp").HasColumnType("int").IsRequired();
         }
     }
 
