@@ -44,6 +44,7 @@ namespace wm_api.Models
         System.Data.Entity.DbSet<FeedbackResponse> FeedbackResponses { get; set; } // FeedbackResponse
         System.Data.Entity.DbSet<GlobalUserLeaderboard> GlobalUserLeaderboards { get; set; } // GlobalUserLeaderboard
         System.Data.Entity.DbSet<Journey> Journeys { get; set; } // Journeys
+        System.Data.Entity.DbSet<JourneysOverview> JourneysOverviews { get; set; } // JourneysOverview
         System.Data.Entity.DbSet<Lesson> Lessons { get; set; } // Lessons
         System.Data.Entity.DbSet<LessonResource> LessonResources { get; set; } // LessonResources
         System.Data.Entity.DbSet<QuestionAnswer> QuestionAnswers { get; set; } // QuestionAnswers
@@ -85,6 +86,7 @@ namespace wm_api.Models
         public System.Data.Entity.DbSet<FeedbackResponse> FeedbackResponses { get; set; } // FeedbackResponse
         public System.Data.Entity.DbSet<GlobalUserLeaderboard> GlobalUserLeaderboards { get; set; } // GlobalUserLeaderboard
         public System.Data.Entity.DbSet<Journey> Journeys { get; set; } // Journeys
+        public System.Data.Entity.DbSet<JourneysOverview> JourneysOverviews { get; set; } // JourneysOverview
         public System.Data.Entity.DbSet<Lesson> Lessons { get; set; } // Lessons
         public System.Data.Entity.DbSet<LessonResource> LessonResources { get; set; } // LessonResources
         public System.Data.Entity.DbSet<QuestionAnswer> QuestionAnswers { get; set; } // QuestionAnswers
@@ -153,6 +155,7 @@ namespace wm_api.Models
             modelBuilder.Configurations.Add(new FeedbackResponseConfiguration());
             modelBuilder.Configurations.Add(new GlobalUserLeaderboardConfiguration());
             modelBuilder.Configurations.Add(new JourneyConfiguration());
+            modelBuilder.Configurations.Add(new JourneysOverviewConfiguration());
             modelBuilder.Configurations.Add(new LessonConfiguration());
             modelBuilder.Configurations.Add(new LessonResourceConfiguration());
             modelBuilder.Configurations.Add(new QuestionAnswerConfiguration());
@@ -176,6 +179,7 @@ namespace wm_api.Models
             modelBuilder.Configurations.Add(new FeedbackResponseConfiguration(schema));
             modelBuilder.Configurations.Add(new GlobalUserLeaderboardConfiguration(schema));
             modelBuilder.Configurations.Add(new JourneyConfiguration(schema));
+            modelBuilder.Configurations.Add(new JourneysOverviewConfiguration(schema));
             modelBuilder.Configurations.Add(new LessonConfiguration(schema));
             modelBuilder.Configurations.Add(new LessonResourceConfiguration(schema));
             modelBuilder.Configurations.Add(new QuestionAnswerConfiguration(schema));
@@ -217,6 +221,7 @@ namespace wm_api.Models
         public System.Data.Entity.DbSet<FeedbackResponse> FeedbackResponses { get; set; }
         public System.Data.Entity.DbSet<GlobalUserLeaderboard> GlobalUserLeaderboards { get; set; }
         public System.Data.Entity.DbSet<Journey> Journeys { get; set; }
+        public System.Data.Entity.DbSet<JourneysOverview> JourneysOverviews { get; set; }
         public System.Data.Entity.DbSet<Lesson> Lessons { get; set; }
         public System.Data.Entity.DbSet<LessonResource> LessonResources { get; set; }
         public System.Data.Entity.DbSet<QuestionAnswer> QuestionAnswers { get; set; }
@@ -243,6 +248,7 @@ namespace wm_api.Models
             FeedbackResponses = new FakeDbSet<FeedbackResponse>("FeedbackResponseId");
             GlobalUserLeaderboards = new FakeDbSet<GlobalUserLeaderboard>("Username", "UserFullName", "UserLevel", "UserXp");
             Journeys = new FakeDbSet<Journey>("JourneyId");
+            JourneysOverviews = new FakeDbSet<JourneysOverview>("JourneyId", "JourneyTitle", "JourneyDescription", "JourneyVideo", "JourneyCompletionTime", "XpReward");
             Lessons = new FakeDbSet<Lesson>("LessonId");
             LessonResources = new FakeDbSet<LessonResource>("LessonResourceId");
             QuestionAnswers = new FakeDbSet<QuestionAnswer>("QuestionAnswerId");
@@ -658,6 +664,18 @@ namespace wm_api.Models
         public int XpReward { get; set; } // XpReward
     }
 
+    // JourneysOverview
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class JourneysOverview
+    {
+        public System.Guid JourneyId { get; set; } // JourneyId (Primary key)
+        public string JourneyTitle { get; set; } // JourneyTitle (Primary key) (length: 50)
+        public string JourneyDescription { get; set; } // JourneyDescription (Primary key) (length: 250)
+        public string JourneyVideo { get; set; } // JourneyVideo (Primary key) (length: 100)
+        public string JourneyCompletionTime { get; set; } // JourneyCompletionTime (Primary key) (length: 10)
+        public int XpReward { get; set; } // XpReward (Primary key)
+    }
+
     // Lessons
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class Lesson
@@ -943,6 +961,29 @@ namespace wm_api.Models
             Property(x => x.RelatedJourneyId).HasColumnName(@"RelatedJourneyId").HasColumnType("uniqueidentifier").IsRequired();
             Property(x => x.JourneyGains).HasColumnName(@"JourneyGains").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(200);
             Property(x => x.XpReward).HasColumnName(@"XpReward").HasColumnType("int").IsRequired();
+        }
+    }
+
+    // JourneysOverview
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class JourneysOverviewConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<JourneysOverview>
+    {
+        public JourneysOverviewConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public JourneysOverviewConfiguration(string schema)
+        {
+            ToTable("JourneysOverview", schema);
+            HasKey(x => new { x.JourneyId, x.JourneyTitle, x.JourneyDescription, x.JourneyVideo, x.JourneyCompletionTime, x.XpReward });
+
+            Property(x => x.JourneyId).HasColumnName(@"JourneyId").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.JourneyTitle).HasColumnName(@"JourneyTitle").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.JourneyDescription).HasColumnName(@"JourneyDescription").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(250).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.JourneyVideo).HasColumnName(@"JourneyVideo").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.JourneyCompletionTime).HasColumnName(@"JourneyCompletionTime").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(10).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.XpReward).HasColumnName(@"XpReward").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
         }
     }
 

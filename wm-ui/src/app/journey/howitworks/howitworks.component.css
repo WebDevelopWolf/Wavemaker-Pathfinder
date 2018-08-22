@@ -1,0 +1,22 @@
+#works-container {
+    margin: 25px;
+    text-align: center;
+}
+
+#works-instructions {
+    width:60%;
+    margin: 25px auto;
+    text-align: justify;
+}
+
+#nav-track {
+    margin: 25px 0;
+}
+
+#bckBtn {
+    float: left;
+}
+
+#fwdBtn {
+    float: right;
+}

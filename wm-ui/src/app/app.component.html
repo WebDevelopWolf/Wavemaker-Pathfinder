@@ -1,17 +1,19 @@
-<div id="heading">
-  <img id="user-avatar" [src]="userAvatar" alt="User Avatar" />
-  <div id="user">
-    <h1>{{userProfile?.UserFullName}}</h1>
-      <div class="progress">
-          <div class="progress-bar" [style.width.%]="xpCalc" style="background: #30c4c9;">
-              <span class="progress-value"> <i class="fa fa-thumbs-up"></i> {{xpCalc}}% Towards Level {{userProfile?.UserLevel + 1}}! Keep Going!</span>
-              <span class="progress-icon" style="border-bottom-color: #30c4c9;"></span>
-          </div>
-      </div>
+<div id="wrapper">
+  <div id="heading">
+    <img id="user-avatar" [src]="userAvatar" alt="User Avatar" />
+    <div id="user">
+      <h1>{{userProfile?.UserFullName}}</h1>
+        <div class="progress">
+            <div class="progress-bar" [style.width.%]="xpCalc">
+                <span class="progress-value"> <i class="fa fa-star"></i> {{xpCalc}}% Towards Level {{userProfile?.UserLevel + 1}}! <i class="fa fa-thumbs-up"></i></span>
+                <span class="progress-icon" style="border-bottom-color: #30c4c9;"></span>
+            </div>
+        </div>
+    </div>
+    <div id="user-stats">
+      Level {{userProfile?.UserLevel}} &nbsp; // &nbsp; #{{leaderboardPos}}
+    </div>
   </div>
-  <div id="user-stats">
-    Level {{userProfile?.UserLevel}} &nbsp; // &nbsp; #{{leaderboardPos}}
-  </div>
+  
+  <router-outlet></router-outlet>
 </div>
-
-<router-outlet></router-outlet>

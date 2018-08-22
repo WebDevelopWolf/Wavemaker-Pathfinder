@@ -1,8 +1,64 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+html, body {
+  height: 100%;
+  margin: 0
+}
 
 body {
     padding: 0;
-    margin: 0;
     background: #efefef;
     color: #000000;
     font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 3em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  width: 300px;
+  text-transform: uppercase;
+  padding: 25px 80px;
+  background: #823aa0;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-family: 'Lato', Calibri, Arial, sans-serif;
+  font-weight: bold;
+  border: 0;
+  cursor: pointer;
+}
+button:before {
+  	left: 48%;
+}
+button:active {
+	background: #9053a9;
+  color: #823aa0;
+	top: 2px;
+}
+button > span {
+	display: inline-block;
+	transition: all 0.5s;
+}
+.icon-forward:before {
+  content: "→";
+  position: absolute;
+}
+.icon-backward:before {
+  content: "←";
+  position: absolute;
+}
+.btn-1:before {
+	left: -100%;
+  transition: all 0.5s;
+}
+.btn-1:hover:before {
+	left: 48%;
+}
+.btn-1:hover > span {
+	transform: translateX(300%);
 }

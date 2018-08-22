@@ -27,6 +27,18 @@ namespace wm_api.Controllers
             if (SingleUser is null) return NotFound(); else return Ok(SingleUser); 
         }
 
+        // Get Global User Leaderboard
+        [Route("User/Leaderboard")]
+        [HttpGet]
+        public IHttpActionResult GetGlobalLeaderboard()
+        {
+            // Get the whole global leaderboard
+            List<GlobalUserLeaderboard> Leaderboard = WmData.GlobalUserLeaderboards.ToList();
+
+            // If the leaderboard has users then return
+            if (Leaderboard.Count > 0 && Leaderboard != null) return Ok(Leaderboard); else return NotFound();
+        }
+
         // Get Users Position in Leaderboard
         [Route("User/Leaderboard/Position/{username}")]
         [HttpGet]
