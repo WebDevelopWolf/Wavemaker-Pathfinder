@@ -42,7 +42,6 @@ export class AppComponent implements OnInit {
     this._wmapi
     .getService("Level/" + (level + 1))
     .then((result) => {
-      console.log(result);
       this.xpCalc = (userxp / result.UserXp) * 100
     })
     .catch(error => console.log(error)); 
@@ -53,7 +52,6 @@ export class AppComponent implements OnInit {
     this._wmapi
     .getService("User/Leaderboard/Position/" + username)
     .then((result) => {
-      console.log(result);
       this.leaderboardPos = result;
     })
     .catch(error => console.log(error)); 

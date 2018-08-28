@@ -6,15 +6,24 @@ html, body {
 }
 
 body {
-    padding: 0;
-    background: #efefef;
-    color: #000000;
-    font-family: 'Open Sans', sans-serif;
+  padding: 0;
+  background: #efefef;
+  color: #000000;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
 }
 
-h1 {
+h1, h2, h3, h4 {
   font-family: 'Fredoka One', cursive;
+}
+
+h1, h3 {
   font-size: 3em;
+  color: #823aa0;
+}
+
+h2, h4 {
+  color: #30c4c9;
 }
 
 button {

@@ -1,0 +1,47 @@
+#journey-at-a-glance {
+    color:#9053a9;
+    font-weight: bold;
+}
+
+i {
+    color: #30c4c9;
+}
+
+#journey-extras {
+    text-align: center;
+    background: #FFFFFF;
+}
+
+#sign-up {
+    width: 75%;
+    padding: 25px;
+}
+
+#journey-users, #journey-related, #journey-details {
+    margin: 1.5em 0;
+}
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; 
+    padding-top: 25px;
+    height: 0;
+}
+
+.videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#journey-info p {
+    text-align: justify;
+}
+
+#journey-details button {
+    display: block;
+    margin: 2.4em auto;
+    width: 100%;
+}

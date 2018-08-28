@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WmApiService } from '../wm-api.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-journey',
@@ -8,7 +9,7 @@ import { WmApiService } from '../wm-api.service';
 })
 export class JourneyComponent implements OnInit {
 
-  constructor(private _wmapi: WmApiService) { }
+  constructor(private _wmapi: WmApiService, private router: ActivatedRoute) { }
 
   journeys: any;
 
@@ -20,7 +21,6 @@ export class JourneyComponent implements OnInit {
     this._wmapi
     .getService("Journeys/Overview")
     .then((result) => {
-      console.log(result);
       // Truncate Description Text and add ...
       result.forEach(j => {
         j.JourneyDescription = j.JourneyDescription.substring(0, 75) + "...";

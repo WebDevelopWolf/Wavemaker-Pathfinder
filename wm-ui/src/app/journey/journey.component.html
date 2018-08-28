@@ -5,7 +5,7 @@
   <ul id="event-card-list" class="row">
 
 		<li class="col" *ngFor="let journey of journeys">
-			<div class="event-card">
+			<div [routerLink]="['/journey', journey.JourneyId]" class="event-card">
         <img src="../../assets/journey/list-icons/3d-printing.png">
         <div class="style-layer">
           <div>

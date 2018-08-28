@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { JourneyComponent } from './journey/journey.component';
 import { HowitworksComponent } from './journey/howitworks/howitworks.component';
+import { DetailComponent } from './journey/detail/detail.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { HowitworksComponent } from './journey/howitworks/howitworks.component';
     AppComponent,
     HomeComponent,
     JourneyComponent,
-    HowitworksComponent
+    HowitworksComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

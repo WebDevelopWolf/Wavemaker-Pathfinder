@@ -1,0 +1,47 @@
+<div id="journey-container" class="container-fluid">
+  <div id="journey-row" class="row">
+    
+    <div id="journey-details" class="col-10">
+      <h1>{{journey?.JourneyTitle}}</h1>
+      <p id="journey-at-a-glance">
+        <i class="fa fa-clock-o" title="Time to Complete" aria-hidden="true"></i> {{journey?.JourneyCompletionTime}} 
+        &nbsp;&nbsp;&nbsp;&nbsp; 
+        <i class="fa fa-graduation-cap" aria-hidden="true" title="Level"></i> Beginner
+        &nbsp;&nbsp;&nbsp;&nbsp; 
+        <i class="fa fa-trophy" aria-hidden="true" title="Badges to earn"></i> 5
+        &nbsp;&nbsp;&nbsp;&nbsp; 
+        <i class="fa fa-user" aria-hidden="true" title="XP"></i> {{journey?.XpReward}} xp
+      </p>
+      <div class="row">
+        <div class="col">
+          <div class="videoWrapper">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/7AfToK-yQyA?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div id="journey-info" class="col">
+          <h4>What's it all about?</h4>
+          <p>{{journey?.JourneyDescription}}</p>
+          <h4>What can I earn?</h4>
+          <p>{{journey?.JourneyRewards}}</p>
+          <h4>What do I get?</h4>  
+          <p>{{journey?.JourneyGains}}</p>
+        </div>
+      </div>
+      <button>What are you waiting for? Lets go...</button>
+    </div>
+    
+    <div id="journey-extras" class="col">
+      <div id="journey-users">
+        <h2>Trailblazers</h2>
+        <p>None</p>
+        <button id="sign-up">Jump in!</button>
+      </div>
+      
+      <div id="journey-related">
+        <h2>Related Journey</h2>
+        <p>None</p>
+      </div>
+    </div>
+
+  </div>
+</div>
