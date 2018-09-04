@@ -1,0 +1,10 @@
+#question-container {
+    text-align: center;
+    width: 100%;
+    padding: 3em;
+}
+
+button {
+    width: 60%;
+    margin: 1em;
+}

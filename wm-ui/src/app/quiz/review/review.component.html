@@ -1,0 +1,9 @@
+<div *ngIf="passed" class="results-container">
+  <h2>Congrats you passed!</h2>
+  <p>Your score is: {{result.QuizResultScore}}</p>
+</div>
+
+<div *ngIf="!passed" class="results-container">
+  <h2>Hard luck, try again!</h2>
+  <p>Your score is: {{result.QuizResultScore}}</p>
+</div>

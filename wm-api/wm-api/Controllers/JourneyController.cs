@@ -33,13 +33,75 @@ namespace wm_api.Controllers
             Guid guid = new Guid(journeyId);
             
             // Make sure we have a guid
-            if (journeyId == null) return NotFound();
+            if (String.IsNullOrEmpty(journeyId)) return NotFound();
 
             // If we have a guid then find the journey
             Journey journey = WmData.Journeys.FirstOrDefault(j => j.JourneyId == guid);
 
             // If that returns a journey then return to application
             if (journey is null) return NotFound(); else return Ok(journey);
+        }
+
+        // Add user to journey
+        [Route("Journey/Signon/{journeyId}/{user}")]
+        [HttpGet]
+        public IHttpActionResult SignUserToJourney(string journeyId, string user)
+        {
+            // Make a new guid
+            Guid JourneyGuid = new Guid(journeyId);
+
+            // Make sure we have a guid and a user
+            if (JourneyGuid == null || String.IsNullOrEmpty(user)) return NotFound();
+
+            // If we do then get the user guid
+            User UserDb = WmData.Users.FirstOrDefault(u => u.Username == user);
+
+            // Check we've got a user and if we have get the GUID
+            if (UserDb == null) return NotFound();
+
+            // Sign the user onto the journey
+            UserJourney UserToJourney = new UserJourney();
+            UserToJourney.UserJourneyId = Guid.NewGuid();
+            UserToJourney.UserId = UserDb.UserId;
+            UserToJourney.JourneyId = JourneyGuid;
+            UserToJourney.LessonProgressId = Guid.NewGuid();
+            WmData.UserJourneys.Add(UserToJourney);
+            WmData.SaveChanges();
+
+            // Tell the app this completed ok
+            return Ok("User assigned to Journey");
+        }
+
+        // Check if trailblazer is on journey
+        [Route("Journey/TrailblazerRegistered/{journeyId}/{username}")]
+        [HttpGet]
+        public IHttpActionResult IsTrailblazerRegistered(string journeyId, string username)
+        {
+            // First we assume the user is not registered
+            int UserRegistered = 0;
+
+            // Make sure we have a guid and a user
+            if (String.IsNullOrEmpty(journeyId) || String.IsNullOrEmpty(username)) return NotFound();
+
+            // If we do then get the user guid
+            User UserDb = WmData.Users.FirstOrDefault(u => u.Username == username);
+
+            // Check we've got a user and if we have get the GUIDs
+            if (UserDb == null) return NotFound();
+            Guid UserGuid = UserDb.UserId;
+            Guid JourneyGuid = new Guid(journeyId);
+
+            // List of Trailblazers for this Journey
+            List<UserJourney> Trailblazers = WmData.UserJourneys.Where(j => j.JourneyId == JourneyGuid).ToList();
+
+            // See if we can find our user in that list
+            UserJourney RegisteredUser = Trailblazers.Find(u => u.UserId == UserGuid);
+
+            // Did we find a user?
+            if (RegisteredUser != null) UserRegistered = 1;
+
+            // Return true / false
+            return Ok(UserRegistered);
         }
     }
 }

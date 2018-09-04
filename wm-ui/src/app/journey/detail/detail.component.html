@@ -27,14 +27,60 @@
           <p>{{journey?.JourneyGains}}</p>
         </div>
       </div>
-      <button>What are you waiting for? Lets go...</button>
+      <button id="register" (click)="signOnToJourney()" *ngIf="!userSignedToJourney">What are you waiting for? Lets go...</button>
+
+      <div class="tab_container" *ngIf="userSignedToJourney">
+        <input id="tab1" type="radio" name="tabs" checked>
+        <label for="tab1"><i class="fa fa-pencil"></i><span>Lessons</span></label>
+  
+        <input id="tab2" type="radio" name="tabs">
+        <label for="tab2"><i class="fa fa-folder"></i><span>Resources</span></label>
+  
+        <input id="tab3" type="radio" name="tabs">
+        <label for="tab3"><i class="fa fa-bullseye"></i><span>Challenges</span></label>
+  
+        <input id="tab4" type="radio" name="tabs">
+        <label for="tab4"><i class="fa fa-trophy"></i><span>Badges and Rewards</span></label>
+  
+        <input id="tab5" type="radio" name="tabs">
+        <label for="tab5"><i class="fa fa-question"></i><span>Q & A</span></label>
+  
+        <section id="content1" class="tab-content">
+          <h4>It all starts here...</h4>
+          <p>Lessons listed here</p>
+        </section>
+  
+        <section id="content2" class="tab-content">
+          <h4>Need some help?</h4>
+          <p>Well we're at your service with all the latest and greatest tips, tricks and resources to get you through your journey.</p>
+          <p>Resources will be listed here</p>
+        </section>
+  
+        <section id="content3" class="tab-content">
+          <h4>Are you ready?</h4>
+          <p>Take one of our challenges or quizzes to find out what you're made of!</p>
+          <button id="take-the-quiz"  [routerLink]="['/quiz', '8483F27E-BCAD-4C68-9057-36B935071A7E']">Welcome to 3D Printing!<br />Let's see what you're made of, Take the first quiz!</button>
+        </section>
+  
+        <section id="content4" class="tab-content">
+          <h4>Learn and Earn!</h4>
+          <p>Check the badges ou can earn for this journey and see all the cool things you can unlock.</p>
+          <p>Badges will be listed here</p>
+        </section>
+  
+        <section id="content5" class="tab-content">
+          <h4>Stuck in the mud?</h4>
+          <p>Tried a challenge and getting nowhere? We're here to help, all you have to do is ask.</p>
+          <p>Q & A will be listed here</p>
+        </section>
+      </div>
     </div>
     
     <div id="journey-extras" class="col">
       <div id="journey-users">
         <h2>Trailblazers</h2>
         <p>None</p>
-        <button id="sign-up">Jump in!</button>
+        <button id="sign-up" (click)="signOnToJourney()" *ngIf="!userSignedToJourney">Jump in!</button>
       </div>
       
       <div id="journey-related">

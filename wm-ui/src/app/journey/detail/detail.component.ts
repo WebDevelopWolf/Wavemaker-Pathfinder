@@ -14,13 +14,13 @@ export class DetailComponent implements OnInit {
   id: number;
   private sub: any;
   journey: any;
+  userSignedToJourney: boolean;
 
   ngOnInit() {
     this.getJourney();
-    // TODO: Get Related Journey
-    // TODO: Add Mechanics for When User is Signed on to Journey
   }
 
+  // Get Journey Details
   getJourney() {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id']; 
@@ -28,9 +28,34 @@ export class DetailComponent implements OnInit {
       .getService("Journey/" + this.id)
       .then((result) => {
         this.journey = result;
+        this.userRegisteredToJourney();
       })
       .catch(error => console.log(error));
-   });
+    });
   }
+
+  // Register Trailblazer to Journey
+  signOnToJourney() {
+    this._wmapi
+    .getService("Journey/Signon/" + this.id + "/" + this._wmapi.tempuser)
+    .then((result) => {
+      this.userSignedToJourney = true;
+    })
+    .catch(error => console.log(error));
+  }
+
+  // Check if Trailblazer is already on Journey
+  userRegisteredToJourney() {
+    this._wmapi
+    .getService("Journey/TrailblazerRegistered/" + this.id + "/" + this._wmapi.tempuser)
+    .then((result) => {
+      if (result == 1) this.userSignedToJourney = true; else this.userSignedToJourney = false;
+      console.log(this.userSignedToJourney);
+    })
+    .catch(error => console.log(error));
+  }
+
+  // TODO: Get registered Trailblazers
+  // TODO: Get a list of registered Trailblazers
 
 }

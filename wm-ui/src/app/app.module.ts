@@ -9,6 +9,9 @@ import { HomeComponent } from './dashboard/home/home.component';
 import { JourneyComponent } from './journey/journey.component';
 import { HowitworksComponent } from './journey/howitworks/howitworks.component';
 import { DetailComponent } from './journey/detail/detail.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { QuestionComponent } from './quiz/question/question.component';
+import { ReviewComponent } from './quiz/review/review.component';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { DetailComponent } from './journey/detail/detail.component';
     HomeComponent,
     JourneyComponent,
     HowitworksComponent,
-    DetailComponent
+    DetailComponent,
+    QuizComponent,
+    QuestionComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,
