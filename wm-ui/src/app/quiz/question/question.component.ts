@@ -14,6 +14,7 @@ export class QuestionComponent implements OnInit {
   id: string;
   private sub: any;
   currentQuestionNumber:number;
+  noOfQuestions: number;
   currentQuestion: any;
   quizQuestionAnswers: any;
   score: number;
@@ -35,6 +36,7 @@ export class QuestionComponent implements OnInit {
           this.questions = result;
           this.score = 0;
           this.currentQuestionNumber = 0;
+          this.noOfQuestions = this.questions.length;
           this.getQuestion(result);
         } else {
           this.getQuestion(this.questions);

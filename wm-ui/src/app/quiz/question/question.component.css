@@ -4,6 +4,11 @@
     padding: 3em;
 }
 
+#quiz-progression {
+    font-size: 0.8em;
+    color: #666666
+}
+
 button {
     width: 60%;
     margin: 1em;

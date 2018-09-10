@@ -1,0 +1,90 @@
+#edu-view {
+    width: 75%;
+    padding: 3em;
+    margin: 0 auto;
+    background: #FFFFFF;
+}
+
+h2 {
+    color: #2B4B6F;
+}
+
+h2 span {
+    font-size: 0.5em;
+}
+
+#addBtn {
+    width: 100%;
+    background: #2B4B6F;
+    margin-top: 2.5em;
+}
+
+#successAlert {
+    margin: 2em 0;
+}
+
+/* Input Styles */
+
+input {
+    border-style: none;
+    background: transparent;
+    outline: none;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.webflow-style-input {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 1em 0;
+    background: #FFFFFF;
+    margin: 1.5em 0;
+}
+
+.webflow-style-input:after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 999;
+    height: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background-position: 0% 0%;
+    background: linear-gradient(to right, #b294ff, #57e6e6, #feffb8, #57e6e6, #b294ff, #57e6e6);
+    background-size: 500% auto;
+    animation: gradient 3s linear infinite;
+}
+
+.webflow-style-input input {
+    flex-grow: 1;
+    color: #2B4B6F;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.webflow-style-input input::-webkit-input-placeholder {
+    color: #7881a1;
+}
+
+#journey-time-out, #journey-xp-out {
+    width:48%;
+}
+
+#journey-time-out {
+    float: left;
+}
+
+#journey-xp-out {
+    float: right;
+}

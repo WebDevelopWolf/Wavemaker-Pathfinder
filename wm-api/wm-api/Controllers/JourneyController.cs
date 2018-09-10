@@ -12,6 +12,49 @@ namespace wm_api.Controllers
     {
         WmDataContext WmData = new WmDataContext();
 
+        #region Classes
+        public class NewJourney
+        {
+            public string JourneyTitle { get; set; }
+            public string JourneyDescription { get; set; }
+            public string JourneyIntroVideo { get; set; }
+            public string JourneyRewards { get; set; }
+            public string JourneyGains { get; set; }
+            public string JourneyCompletionTime { get; set; }
+            public Int32 XpReward { get; set; }
+            public string JourneyId { get; set; }
+        }
+        #endregion
+
+        #region PostJourneys
+        // Add a new Journey
+        [Route("Journey/Add")]
+        [HttpPost]
+        public IHttpActionResult AddJourney([FromBody] NewJourney newJourney)
+        {
+            if (newJourney is null) return NotFound();
+
+            // Generate Journey & Add to database
+            var NewJourney = new Journey();
+            NewJourney.JourneyId = Guid.NewGuid();
+            NewJourney.JourneyCompletionTime = newJourney.JourneyCompletionTime;
+            NewJourney.JourneyDescription = newJourney.JourneyDescription;
+            NewJourney.JourneyGains = newJourney.JourneyGains;
+            NewJourney.JourneyRewards = newJourney.JourneyRewards;
+            NewJourney.JourneyTitle = newJourney.JourneyTitle;
+            NewJourney.JourneyVideo = newJourney.JourneyIntroVideo;
+            NewJourney.XpReward = newJourney.XpReward;
+
+            // Add to database
+            WmData.Journeys.Add(NewJourney);
+            WmData.SaveChanges();
+
+            // Return success message
+            return Ok("Journey Added");
+        }
+        #endregion
+
+        #region GetJourneys
         // Get an Overview of all Journeys
         [Route("Journeys/Overview")]
         [HttpGet]
@@ -31,7 +74,7 @@ namespace wm_api.Controllers
         {
             // Make a new guid
             Guid guid = new Guid(journeyId);
-            
+
             // Make sure we have a guid
             if (String.IsNullOrEmpty(journeyId)) return NotFound();
 
@@ -41,7 +84,9 @@ namespace wm_api.Controllers
             // If that returns a journey then return to application
             if (journey is null) return NotFound(); else return Ok(journey);
         }
+        #endregion
 
+        #region JourneyTrailblazerFunctions
         // Add user to journey
         [Route("Journey/Signon/{journeyId}/{user}")]
         [HttpGet]
@@ -103,5 +148,7 @@ namespace wm_api.Controllers
             // Return true / false
             return Ok(UserRegistered);
         }
+        #endregion
+
     }
 }

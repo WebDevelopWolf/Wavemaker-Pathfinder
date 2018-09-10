@@ -7,6 +7,8 @@ import { DetailComponent } from './journey/detail/detail.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuestionComponent } from './quiz/question/question.component';
 import { ReviewComponent } from './quiz/review/review.component';
+import { EducatorComponent } from './educator/educator.component';
+import { AddComponent } from './educator/journey/add/add.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch:'full'},
@@ -16,7 +18,9 @@ const routes: Routes = [
   {path: 'journey/:id', component: DetailComponent},
   {path: 'quiz/:id', component: QuizComponent},
   {path: 'quiz/question/:id', component: QuestionComponent},
-  {path: 'quiz/review/:id', component: ReviewComponent}
+  {path: 'quiz/review/:id', component: ReviewComponent},
+  {path: 'educator', component: EducatorComponent},
+  {path: 'educator/journey/add', component: AddComponent}
 ];
 
 @NgModule({

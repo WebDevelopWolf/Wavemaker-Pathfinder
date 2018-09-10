@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '../../node_modules/@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -12,6 +13,8 @@ import { DetailComponent } from './journey/detail/detail.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuestionComponent } from './quiz/question/question.component';
 import { ReviewComponent } from './quiz/review/review.component';
+import { EducatorComponent } from './educator/educator.component';
+import { AddComponent } from './educator/journey/add/add.component';
 
 
 @NgModule({
@@ -23,12 +26,15 @@ import { ReviewComponent } from './quiz/review/review.component';
     DetailComponent,
     QuizComponent,
     QuestionComponent,
-    ReviewComponent
+    ReviewComponent,
+    EducatorComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
