@@ -1,0 +1,34 @@
+<div id="edu-view">
+  
+  <h2>JourneyMaker <span>From Wavemaker</span></h2>
+  <h2>Add a Quiz</h2>
+
+  <div id="successAlert" class="alert alert-success" *ngIf="quizSuccess" role="alert">
+    Quiz Added!
+  </div>
+
+  <div *ngIf="showQuiz" id="quiz">
+    <div class="input-style"><input id="quiz-title" [(ngModel)]="QuizTitle" type="text" placeholder="Title of your quiz (e.g. 3D Printing Basics)" /></div>
+    <div class="input-style"><input id="quiz-instructions" [(ngModel)]="QuizInstructions" type="text" placeholder="Instructions for users (Tip: Give your users a reason to take this quiz)" /></div>
+    <div class="input-style small"><input id="quiz-passmark" [(ngModel)]="QuizPassMark" type="text" placeholder="What's the pass mark for this quiz? (e.g. 100, 50, 25 etc.)" /></div>
+    
+    <label class="select-box small">
+      <select (change)="setQuizTest($event.target)">
+        <option>Are users completing this quiz in exam conditions?</option>
+        <option [value]="quizTestYes">Yes</option>
+        <option [value]="quizTestNo">No</option>
+      </select>
+    </label>
+
+    <button id="addBtn" class="btn-1 icon-forward" (click)="addQuiz()">Done? Lets add some Questions</button>
+  </div>
+
+  <div *ngIf="showQuestions" id="questions">
+
+  </div>
+
+  <div *ngIf="showAnswers" id="answers">
+
+  </div>
+
+</div>

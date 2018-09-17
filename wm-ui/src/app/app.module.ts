@@ -18,6 +18,7 @@ import { AddComponent } from './educator/journey/add/add.component';
 import { AssignComponent } from './educator/journey/assign/assign.component';
 import { ToastComponent } from './utils/toast/toast.component';
 import { EditComponent } from './educator/journey/edit/edit.component';
+import { AddQuizComponent } from './educator/quiz/add-quiz/add-quiz.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { EditComponent } from './educator/journey/edit/edit.component';
     AddComponent,
     AssignComponent,
     ToastComponent,
-    EditComponent
+    EditComponent,
+    AddQuizComponent
   ],
   imports: [
     BrowserModule,
