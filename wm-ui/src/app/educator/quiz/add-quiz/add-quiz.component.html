@@ -8,6 +8,7 @@
   </div>
 
   <div *ngIf="showQuiz" id="quiz">
+    <h2>Step One - Quiz Basics</h2>
     <div class="input-style"><input id="quiz-title" [(ngModel)]="QuizTitle" type="text" placeholder="Title of your quiz (e.g. 3D Printing Basics)" /></div>
     <div class="input-style"><input id="quiz-instructions" [(ngModel)]="QuizInstructions" type="text" placeholder="Instructions for users (Tip: Give your users a reason to take this quiz)" /></div>
     <div class="input-style small"><input id="quiz-passmark" [(ngModel)]="QuizPassMark" type="text" placeholder="What's the pass mark for this quiz? (e.g. 100, 50, 25 etc.)" /></div>
@@ -20,11 +21,21 @@
       </select>
     </label>
 
-    <button id="addBtn" class="btn-1 icon-forward" (click)="addQuiz()">Done? Lets add some Questions</button>
+    <button id="addBtn" (click)="addQuiz()">Done? Lets add some Questions <i class="fa fa-arrow-right"></i></button>
   </div>
 
   <div *ngIf="showQuestions" id="questions">
+    <h2>Step 2 - Add Questions</h2>
 
+    <div id="Question-Tip" class="alert alert-info" role="alert">
+      Tip: Make sure all your questions add up to 100 (So far your quesions add up to {{ScoreSoFar}})
+    </div>
+
+    <div class="input-style"><input id="question-text" [(ngModel)]="QuestionText" type="text" placeholder="Question Text (e.g. What is 3D Printing?)" /></div>
+    <div class="input-style small"><input id="question-score" [(ngModel)]="QuestionValue" type="text" placeholder="What's this question worth? (e.g. 5, 10 etc.)" /></div>
+
+    <button id="addBtn" (click)="addQuestion()">Add Another Question</button>
+    <button id="addBtn" (click)="addLastQuestion()">That all of them? Add some Answers <i class="fa fa-arrow-right"></i></button>
   </div>
 
   <div *ngIf="showAnswers" id="answers">
