@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WmApiService } from '../../wm-api.service';
 import { ActivatedRoute } from '@angular/router';
+import { BadgeService } from '../../badge.service';
 
 @Component({
   selector: 'app-review',
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReviewComponent implements OnInit {
 
-  constructor(private _wmapi: WmApiService, private route: ActivatedRoute) { }
+  constructor(private _wmapi: WmApiService, private route: ActivatedRoute, private _badge: BadgeService) { }
 
   result: any;
   id: string;
@@ -29,6 +30,7 @@ export class ReviewComponent implements OnInit {
         this.result = result;
         if (this.result.QuizResultPass == "P") {
           this.passed = true;
+          this._badge.rewardBadge("Test badge text");
         } else {
           this.passed = false;
         }

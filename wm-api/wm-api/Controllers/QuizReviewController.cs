@@ -49,12 +49,16 @@ namespace wm_api.Controllers
                 QuizResult ExisitingResult = ExistingResults.FirstOrDefault(u => u.UserId == UserDb.UserId);
                 if (ExisitingResult == null)
                 {
+                    // As it's the first run through, they can have a badge, yey!
+                    var BadgeCrtl = new BadgeController();
+                    bool BadgeAwarded = BadgeCrtl.AwardBadgeByType(Quiz.QuizId, "challenge", UserDb.UserId);
+                    if (!BadgeAwarded) return NotFound();
                     // Add Result
                     WmData.QuizResults.Add(Result);
                 }
                 else
                 {
-                    // Update Result
+                    // Update Result only (no badge for these guys)
                     ExisitingResult.QuizResultScore = score;
                     ExisitingResult.QuizResultPass = Result.QuizResultPass;
                 }

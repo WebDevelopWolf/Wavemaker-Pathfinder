@@ -57,5 +57,17 @@ namespace wm_api.Controllers
             // If position found then return
             if (Pos != 0) return Ok(Pos); else return NotFound();
         }
+
+        // Get Global Users List
+        [Route("Users")]
+        [HttpGet]
+        public IHttpActionResult GetListOfUsers()
+        {
+            // Get the users from the database
+            List<User> AllUsers = WmData.Users.ToList();
+
+            // If the leaderboard has users then return
+            if (AllUsers.Count > 0 && AllUsers != null) return Ok(AllUsers); else return NotFound();
+        }
     }
 }

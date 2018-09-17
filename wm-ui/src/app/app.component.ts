@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { WmApiService } from './wm-api.service';
+import { BadgeService } from './badge.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [WmApiService]
+  providers: [WmApiService, BadgeService]
 })
 export class AppComponent implements OnInit {
   title = 'app';

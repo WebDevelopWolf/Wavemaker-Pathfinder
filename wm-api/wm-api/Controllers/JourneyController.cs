@@ -52,6 +52,32 @@ namespace wm_api.Controllers
             // Return success message
             return Ok("Journey Added");
         }
+
+        // Edit a Journey
+        // Add a new Journey
+        [Route("Journey/Edit")]
+        [HttpPost]
+        public IHttpActionResult EditJourney([FromBody] NewJourney newJourney)
+        {
+            if (newJourney is null) return NotFound();
+
+            // Generate Journey & Add to database
+            Guid NewGuid = new Guid(newJourney.JourneyId);
+            var NewJourney = WmData.Journeys.FirstOrDefault(j => j.JourneyId == NewGuid);
+            NewJourney.JourneyCompletionTime = newJourney.JourneyCompletionTime;
+            NewJourney.JourneyDescription = newJourney.JourneyDescription;
+            NewJourney.JourneyGains = newJourney.JourneyGains;
+            NewJourney.JourneyRewards = newJourney.JourneyRewards;
+            NewJourney.JourneyTitle = newJourney.JourneyTitle;
+            NewJourney.JourneyVideo = newJourney.JourneyIntroVideo;
+            NewJourney.XpReward = newJourney.XpReward;
+
+            // Add to database
+            WmData.SaveChanges();
+
+            // Return success message
+            return Ok("Journey Edited");
+        }
         #endregion
 
         #region GetJourneys
@@ -114,6 +140,30 @@ namespace wm_api.Controllers
             WmData.SaveChanges();
 
             // Tell the app this completed ok
+            return Ok("User assigned to Journey");
+        }
+
+        // Add user to journey with ID's
+        [Route("Journey/Assign/{journeyId}/{userId}")]
+        [HttpGet]
+        public IHttpActionResult AssignUserToJourney(string journeyId, string userId)
+        {
+            // Make a new guid
+            Guid JourneyGuid = new Guid(journeyId);
+            Guid UserGuid = new Guid(userId);
+
+            // Make sure we have a guid and a user
+            if (JourneyGuid == null || UserGuid == null) return NotFound();
+
+            // If we do then make a new UserJourney
+            UserJourney UserToJourney = new UserJourney();
+            UserToJourney.UserJourneyId = Guid.NewGuid();
+            UserToJourney.UserId = UserGuid;
+            UserToJourney.JourneyId = JourneyGuid;
+            UserToJourney.LessonProgressId = Guid.NewGuid();
+            WmData.UserJourneys.Add(UserToJourney);
+            WmData.SaveChanges();
+
             return Ok("User assigned to Journey");
         }
 
