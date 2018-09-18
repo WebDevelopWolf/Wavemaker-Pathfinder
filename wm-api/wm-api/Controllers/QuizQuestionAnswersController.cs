@@ -13,6 +13,15 @@ namespace wm_api.Controllers
         WmDataContext WmData = new WmDataContext();
         _Utils Util = new _Utils();
 
+        public class newAnswer
+        {
+            public string QuestionId { get; set; }
+            public string Answer { get; set; }
+            public string AnswerAdvice { get; set; }
+            public string CorrectAnswer { get; set; }
+            public string AnswerId { get; set; }
+        }
+
         // Get an Overview of all Journeys
         [Route("Quiz/Question/Answers/{questionId}")]
         [HttpGet]
@@ -30,6 +39,35 @@ namespace wm_api.Controllers
 
             // If we find an answer set then lets return it
             if (Answers != null) return Ok(Answers); else return NotFound();
+        }
+
+        // Add answers to question
+        [Route("Quiz/Questions/Answers/Add")]
+        [HttpPost]
+        public IHttpActionResult AddAnswers([FromBody] List<newAnswer> Answers)
+        {
+            // Make sure we have data from the body
+            if (Answers is null) return NotFound();
+
+            // Convert each question and add to data
+            foreach (var a in Answers)
+            {
+                // Generate New Question
+                var NewAnswer = new QuestionAnswer();
+                NewAnswer.QuestionAnswerId = Guid.NewGuid();
+                NewAnswer.QuestionId = new Guid(a.QuestionId);
+                NewAnswer.Answer = a.Answer;
+                NewAnswer.AnswerAdvice = a.AnswerAdvice;
+                NewAnswer.CorrectAnswer = a.CorrectAnswer;
+                // Add to database
+                WmData.QuestionAnswers.Add(NewAnswer);
+            }
+
+            // Commit Changes to the Database
+            WmData.SaveChanges();
+
+            // If we have Questions then return them, if not return Not Found
+            return Ok("Answers Added");
         }
     }
 }

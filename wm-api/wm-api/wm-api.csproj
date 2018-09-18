@@ -198,6 +198,7 @@
     <Compile Include="Controllers\BadgeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JourneyController.cs" />
+    <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
     <Compile Include="Controllers\QuizQuestionAnswersController.cs" />
     <Compile Include="Controllers\QuizQuestionsController.cs" />

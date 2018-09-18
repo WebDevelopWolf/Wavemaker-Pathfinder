@@ -14,7 +14,17 @@ namespace wm_api.Controllers
         WmDataContext WmData = new WmDataContext();
         _Utils Util = new _Utils();
 
-        // Get an Overview of all Journeys
+        #region Classes
+        public class Question
+        {
+           public string QuizId { get; set; }
+           public string QuestionText { get; set; }
+           public Int32 QuestionValue { get; set; }
+           public string QuestionId { get; set; }
+        }
+        #endregion
+
+        // Get quiz questions by quiz ID
         [Route("Quiz/Questions/{quizID}")]
         [HttpGet]
         public IHttpActionResult GetQuizQuestionsByQuizId(string quizId)
@@ -31,6 +41,38 @@ namespace wm_api.Controllers
 
             // If we find a question set then lets return it
             if (Questions != null) return Ok(Questions); else return NotFound();
+        }
+
+        // Add Questions to data
+        [Route("Quiz/Questions/Add")]
+        [HttpPost]
+        public IHttpActionResult AddQuestions([FromBody] List<Question> Questions)
+        {
+            // Make sure we have data from the body
+            if (Questions is null) return NotFound();
+
+            // Convert each question and add to data
+            foreach (var q in Questions)
+            {
+                // Generate New Question
+                var NewQuestion = new QuizQuestion();
+                NewQuestion.QuestionId = Guid.NewGuid();
+                NewQuestion.QuizId = new Guid(q.QuizId);
+                NewQuestion.QuestionText = q.QuestionText;
+                NewQuestion.QuestionScoreValue = q.QuestionValue;
+                // Add to database
+                WmData.QuizQuestions.Add(NewQuestion);
+            }
+            
+            // Commit Changes to the Database
+            WmData.SaveChanges();
+
+            // Get the newly added Questions
+            Guid QuizId = new Guid(Questions[0].QuizId);
+            List<QuizQuestion> QuestionsReturn = WmData.QuizQuestions.Where(q => q.QuizId == QuizId).ToList();
+
+            // If we have Questions then return them, if not return Not Found
+            if (QuestionsReturn != null || QuestionsReturn.Count > 0) return Ok(QuestionsReturn); else return NotFound();
         }
     }
 }

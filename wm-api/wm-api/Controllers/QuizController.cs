@@ -12,6 +12,19 @@ namespace wm_api.Controllers
     {
         WmDataContext WmData = new WmDataContext();
 
+        #region Classes
+        public class NewQuiz
+        {
+            public string LessonId { get; set; }
+            public string QuizTitle { get; set; }
+            public string QuizInstructions { get; set; }
+            public Int32 QuizPassMark { get; set; }
+            public string QuizTest { get; set; }
+            public string QuizId { get; set; }
+        }
+        #endregion
+
+        #region GetQuiz
         // Get an Overview of all Journeys
         [Route("Quiz/{quizID}")]
         [HttpGet]
@@ -27,5 +40,32 @@ namespace wm_api.Controllers
             // If we find a quiz then lets return it
             if (Quiz != null) return Ok(Quiz); else return NotFound();
         }
+        #endregion
+
+        #region PostQuiz
+        // Add Quiz to Data
+        [Route("Quiz/Add")]
+        [HttpPost]
+        public IHttpActionResult AddQuiz([FromBody] NewQuiz newQuiz)
+        {
+            if (newQuiz is null) return NotFound();
+
+            // Generate Quiz
+            var NewQuiz = new Quizze();
+            NewQuiz.QuizId = Guid.NewGuid();
+            NewQuiz.LessonId = new Guid(newQuiz.LessonId);
+            NewQuiz.QuizTitle = newQuiz.QuizTitle;
+            NewQuiz.QuizInstructions = newQuiz.QuizInstructions;
+            NewQuiz.QuizPassMark = newQuiz.QuizPassMark;
+            NewQuiz.QuizTest = newQuiz.QuizTest;
+
+            // Add to database
+            WmData.Quizzes.Add(NewQuiz);
+            WmData.SaveChanges();
+
+            // Return the new QuizId
+            return Ok(NewQuiz.QuizId);
+        }
+        #endregion
     }
 }
