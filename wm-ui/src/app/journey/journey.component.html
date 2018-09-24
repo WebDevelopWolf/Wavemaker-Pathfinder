@@ -5,11 +5,11 @@
   <ul id="event-card-list" class="row">
 
 		<li class="col" *ngFor="let journey of journeys">
-			<div [routerLink]="['/journey', journey.JourneyId]" class="event-card">
-        <img src="../../assets/journey/list-icons/3d-printing.png">
+			<div class="event-card">
+        <img [routerLink]="['/journey', journey.JourneyId]" src="../../assets/journey/list-icons/3d-printing.png">
         <div class="style-layer">
           <div>
-            <h2 class="name">{{journey.JourneyTitle}}</h2>
+            <h2 [routerLink]="['/journey', journey.JourneyId]" class="name">{{journey.JourneyTitle}}</h2>
             <a data-toggle="modal" data-target="#vidPreview"><h4 class="date"><i class="fa fa-video-camera"></i> Video Preview</h4></a>
           </div>
           <div class="event-desc">

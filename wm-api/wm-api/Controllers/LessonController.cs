@@ -23,6 +23,20 @@ namespace wm_api.Controllers
             // If we have Lessons then return them, if not return Not Found
             if (Lessons != null) return Ok(Lessons); else return NotFound();
         }
+
+        [Route("Journey/Lessons/{journeyid}")]
+        [HttpGet]
+        public IHttpActionResult GetLessonsForJourney(string journeyid)
+        {
+            // Get Journey Guid
+            Guid JourneyGuid = new Guid(journeyid);
+
+            // Get all Lessons from Data
+            List<Lesson> Lessons = WmData.Lessons.Where(l => l.JourneyId == JourneyGuid).ToList();
+
+            // If we have Lessons then return them, if not return Not Found
+            if (Lessons != null) return Ok(Lessons); else return NotFound();
+        }
         #endregion
     }
 }

@@ -22,13 +22,15 @@
 	overflow: hidden;
 	width: 700px;
     border-radius: 0.3em;
-    background: #FFF;
+	background: #FFF;
+	margin-bottom: 1em;
 }
 
 .event-card img {
 	width: 240px;
     height: 200px;
-    float: left; 
+	float: left; 
+	cursor: pointer;
 }
 
 .event-card .style-layer {
@@ -40,7 +42,8 @@
 .event-card .name {
 	font-size: 2.3em;
     font-weight: 400;
-    color: #FE453E;
+	color: #FE453E;
+	cursor: pointer;
 }
 
 .event-card .name a {
@@ -51,13 +54,14 @@
 	font-size: 1.4em;
 	font-weight: 400;
 	color: #6D6D6D;
+	cursor: pointer;
 }
 
 .event-card .location {
 	font-size: 0.8em;
     color: #757575;
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
 }
 
 .event-card .location i {

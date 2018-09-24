@@ -12,6 +12,7 @@ import { AddComponent } from './educator/journey/add/add.component';
 import { AssignComponent } from './educator/journey/assign/assign.component';
 import { EditComponent } from './educator/journey/edit/edit.component';
 import { AddQuizComponent } from './educator/quiz/add-quiz/add-quiz.component';
+import { DirectoryComponent } from './directory/directory.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch:'full'},
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'educator/journey/add', component: AddComponent},
   {path: 'educator/journey/assign', component: AssignComponent},
   {path: 'educator/journey/edit', component: EditComponent},
-  {path: 'educator/quiz/add', component: AddQuizComponent}
+  {path: 'educator/quiz/add', component: AddQuizComponent},
+  {path: 'directory', component: DirectoryComponent}
 ];
 
 @NgModule({

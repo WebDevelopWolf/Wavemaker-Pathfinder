@@ -61,7 +61,7 @@
     </label>
 
     <div class="input-style"><input id="answer-text" [(ngModel)]="Answer" type="text" placeholder="What is the answer text? (Tip: Make fake answers as convincing as possible for a real challenge)" /></div>
-    <div class="input-style small"><input id="answer-advice" [(ngModel)]="AnswerAdvice" type="text" placeholder="Why is this answer wrong or right? (Tip: Even if the answer is wrong, provide some encouragement to keep going)" /></div>
+    <div class="input-style"><input id="answer-advice" [(ngModel)]="AnswerAdvice" type="text" placeholder="Why is this answer wrong or right? (Tip: Even if the answer is wrong, provide some encouragement to keep going)" /></div>
 
     <label class="select-box small">
       <select (change)="setAnswerCorrect($event.target)">

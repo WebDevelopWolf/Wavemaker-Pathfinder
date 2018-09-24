@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WmApiService } from '../../wm-api.service';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-detail',
@@ -9,15 +10,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailComponent implements OnInit {
 
-  constructor(private _wmapi: WmApiService, private route: ActivatedRoute) { }
+  constructor(private _wmapi: WmApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { }
 
   id: number;
   private sub: any;
   journey: any;
   userSignedToJourney: boolean;
+  lessons: any;
+  relatedJourney: any;
+  vidUrl: any;
 
   ngOnInit() {
     this.getJourney();
+    this.journeyLessons();
+    this.getRelatedJourney();
   }
 
   // Get Journey Details
@@ -29,6 +35,7 @@ export class DetailComponent implements OnInit {
       .then((result) => {
         this.journey = result;
         this.userRegisteredToJourney();
+        this.vidUrl = this.sanitizer.bypassSecurityTrustResourceUrl(result.JourneyVideo);
       })
       .catch(error => console.log(error));
     });
@@ -56,6 +63,27 @@ export class DetailComponent implements OnInit {
   }
 
   // TODO: Get registered Trailblazers
-  // TODO: Get a list of registered Trailblazers
+  
+  // Get Lesson List
+  journeyLessons() {
+    this._wmapi
+    .getService("Journey/Lessons/" + this.id)
+    .then((result) => {
+      // Push Lessons to UI
+      this.lessons = result;
+    })
+    .catch(error => console.log(error));
+  }
+
+  // Get Related Journey
+  getRelatedJourney() {
+    this._wmapi
+    .getService("Journey/Related/" + this.id)
+    .then((result) => {
+      // Push Lessons to UI
+      this.relatedJourney = result;
+    })
+    .catch(error => console.log(error));
+  }
 
 }

@@ -111,6 +111,16 @@ label .fa {
   margin: 0 0.4em 0 0;
 }
 
+strong {
+  color: #9053a9;
+}
+
+.lesson {
+  background: #f0f0f0;
+  padding: 0.5em;
+  width: 100%;
+}
+
 /*Media query*/
 @media only screen and (max-width: 900px) {
   label span {

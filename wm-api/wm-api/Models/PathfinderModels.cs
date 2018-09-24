@@ -688,6 +688,7 @@ namespace wm_api.Models
         public string LessonCompletionTime { get; set; } // LessonCompletionTime (length: 10)
         public string LessonGains { get; set; } // LessonGains (length: 200)
         public int? XpReward { get; set; } // XpReward
+        public System.Guid? JourneyId { get; set; } // JourneyId
     }
 
     // LessonResources
@@ -1009,6 +1010,7 @@ namespace wm_api.Models
             Property(x => x.LessonCompletionTime).HasColumnName(@"LessonCompletionTime").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(10);
             Property(x => x.LessonGains).HasColumnName(@"LessonGains").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(200);
             Property(x => x.XpReward).HasColumnName(@"XpReward").HasColumnType("int").IsOptional();
+            Property(x => x.JourneyId).HasColumnName(@"JourneyId").HasColumnType("uniqueidentifier").IsOptional();
         }
     }
 

@@ -15,7 +15,7 @@
       <div class="row">
         <div class="col">
           <div class="videoWrapper">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/7AfToK-yQyA?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              <iframe width="560" height="315" [src]="vidUrl" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
         <div id="journey-info" class="col">
@@ -47,7 +47,10 @@
   
         <section id="content1" class="tab-content">
           <h4>It all starts here...</h4>
-          <p>Lessons listed here</p>
+          <div class="lesson" *ngFor="let lesson of lessons">
+            <strong>{{lesson.LessonTitle}} · {{lesson.LessonCompletionTime}} minutes</strong>
+            <p>{{lesson.LessonDescription}}</p>
+          </div>
         </section>
   
         <section id="content2" class="tab-content">
@@ -85,7 +88,7 @@
       
       <div id="journey-related">
         <h2>Related Journey</h2>
-        <p>None</p>
+        <a [routerLink]="['/journey', relatedJourney.JourneyId]"><p>{{relatedJourney.JourneyTitle}}</p></a>
       </div>
     </div>
 

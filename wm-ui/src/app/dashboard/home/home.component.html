@@ -1,5 +1,11 @@
-<div id="main-content">
+<div *ngIf="!userSignedToJourney" class="main-content">
     <a [routerLink]="['/journey/howitworks']" routerLinkActive="active">
       <div class="long-shadow">Start your Journey and make some waves...</div>
     </a>
+</div>
+
+<div *ngIf="userSignedToJourney" class="main-content">
+  <a [routerLink]="['/journey']" routerLinkActive="active">
+    <div class="long-shadow">Continue on your Journey...</div>
+  </a>
 </div>
