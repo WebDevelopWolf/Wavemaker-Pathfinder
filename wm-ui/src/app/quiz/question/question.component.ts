@@ -89,8 +89,6 @@ export class QuestionComponent implements OnInit {
   // Update score
   updateScore(questionScore: number) {
     this.score = this.score + questionScore;
-    console.log(this.score);
-    console.log(this.currentQuestionNumber);
   }
 
   // Push users to the quiz review
@@ -99,7 +97,6 @@ export class QuestionComponent implements OnInit {
     this._wmapi
       .getService("Quiz/Review/Add/" + this.id + "/" + this._wmapi.tempuser + "/" + this.score)
       .then((result) => {
-        console.log(result);
         // Navigate to review
         this.router.navigate(['/quiz/review/', this.id]);
       })

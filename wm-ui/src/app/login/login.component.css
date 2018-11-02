@@ -1,0 +1,28 @@
+:host{
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+}
+
+#login-wrapper {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #FFF;
+    text-align: center;
+}
+
+#googleBtn {
+    display: inline-block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 25px;
+    border: none;
+    font: normal 30px/1 "Fredoka One", Helvetica, sans-serif;
+    color: #2fb9ef;
+    text-align: center;
+    cursor: pointer;
+}

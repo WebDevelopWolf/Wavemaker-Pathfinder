@@ -24,6 +24,7 @@ namespace wm_api.Controllers
         }
         #endregion
 
+        #region GetQuestions
         // Get quiz questions by quiz ID
         [Route("Quiz/Questions/{quizID}")]
         [HttpGet]
@@ -42,7 +43,9 @@ namespace wm_api.Controllers
             // If we find a question set then lets return it
             if (Questions != null) return Ok(Questions); else return NotFound();
         }
+        #endregion
 
+        #region PostQuestions
         // Add Questions to data
         [Route("Quiz/Questions/Add")]
         [HttpPost]
@@ -63,7 +66,7 @@ namespace wm_api.Controllers
                 // Add to database
                 WmData.QuizQuestions.Add(NewQuestion);
             }
-            
+
             // Commit Changes to the Database
             WmData.SaveChanges();
 
@@ -74,5 +77,6 @@ namespace wm_api.Controllers
             // If we have Questions then return them, if not return Not Found
             if (QuestionsReturn != null || QuestionsReturn.Count > 0) return Ok(QuestionsReturn); else return NotFound();
         }
+        #endregion
     }
 }

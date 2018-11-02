@@ -6,7 +6,7 @@
 
 		<li class="col" *ngFor="let journey of journeys">
 			<div class="event-card">
-        <img [routerLink]="['/journey', journey.JourneyId]" src="../../assets/journey/list-icons/3d-printing.png">
+        <img [routerLink]="['/journey', journey.JourneyId]" src="assets/journey/list-icons/3d-printing.png">
         <div class="style-layer">
           <div>
             <h2 [routerLink]="['/journey', journey.JourneyId]" class="name">{{journey.JourneyTitle}}</h2>

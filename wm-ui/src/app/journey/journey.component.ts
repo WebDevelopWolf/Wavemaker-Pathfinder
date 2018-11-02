@@ -27,8 +27,6 @@ export class JourneyComponent implements OnInit {
       });
       // Push the user to UI
       this.journeys = result;
-      // TODO: Set the Journey Preview Images
-      // TODO: Set the Journey Preview Videos
     })
     .catch(error => console.log(error));
   }

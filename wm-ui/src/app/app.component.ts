@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
 
   // Fill the user profile information
   getUserProfile() {
+    console.log("Logged in user:" + this._wmapi.tempuser);
     this._wmapi
     .getService("User/" + this._wmapi.tempuser)
     .then((result) => {
@@ -33,7 +34,7 @@ export class AppComponent implements OnInit {
       this.getGlobalLeaderboardPos(result.Username);
       this.userProfile = result;
       // Set the user avatar
-      this.userAvatar = "../assets/users/profile/" + this.userProfile.Username + ".png"; 
+      this.userAvatar = this._wmapi.tempuseravatar; 
     })
     .catch(error => console.log(error));
   }

@@ -12,6 +12,7 @@ namespace wm_api.Controllers
     {
         WmDataContext WmData = new WmDataContext();
 
+        #region GetXP
         // Get the XP details for level
         [Route("Level/{level}")]
         [HttpGet]
@@ -26,5 +27,7 @@ namespace wm_api.Controllers
             // Check if level has been found and if so return it
             if (Lvl is null) return NotFound(); else return Ok(Lvl);
         }
+        #endregion
+
     }
 }

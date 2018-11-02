@@ -144,8 +144,6 @@ export class AddQuizComponent implements OnInit {
     .then((result) => {
       // Set Questions with Ids
       this.QuestionsReturned = result;
-      console.log(result);
-      console.log(this.QuestionsReturned);
       // Hide Quiz, Show Questions
       this.showQuestions = false;
       this.showAnswers = true;
@@ -188,7 +186,6 @@ export class AddQuizComponent implements OnInit {
     a.AnswerAdvice = this.AnswerAdvice;
     a.CorrectAnswer = this.CorrectAnswer;
     this.Answers.push(a);
-    console.log(this.Answers);  
   }
 
   addAnswersToDb(){

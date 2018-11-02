@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WmApiService } from '../../wm-api.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +11,10 @@ export class HomeComponent implements OnInit {
 
   userSignedToJourney: boolean;
 
-  constructor(private _wmapi: WmApiService) { }
+  constructor(private _wmapi: WmApiService, private comp: AppComponent) { }
 
   ngOnInit() {
+    this.comp.getUserProfile();
     this.userRegisteredToJourney();
   }
   
@@ -22,7 +24,6 @@ export class HomeComponent implements OnInit {
     .getService("Journey/TrailblazerRegistered/" + this._wmapi.tempuser)
     .then((result) => {
       if (result == 1) this.userSignedToJourney = true; else this.userSignedToJourney = false;
-      console.log(this.userSignedToJourney);
     })
     .catch(error => console.log(error));
   }

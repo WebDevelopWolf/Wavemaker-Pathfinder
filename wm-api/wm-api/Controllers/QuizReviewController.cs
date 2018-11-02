@@ -12,6 +12,8 @@ namespace wm_api.Controllers
     {
         WmDataContext WmData = new WmDataContext();
 
+        #region GetReview
+        // Add Quiz Review
         [Route("Quiz/Review/Add/{quizId}/{username}/{score}")]
         [HttpGet]
         public IHttpActionResult AddQuizResult(string quizId, string username, int score)
@@ -74,6 +76,7 @@ namespace wm_api.Controllers
             return Ok("Result Added to Trailblazer");
         }
 
+        // Get a quiz review by quiz and user
         [Route("Quiz/Review/{quizId}/{username}")]
         [HttpGet]
         public IHttpActionResult GetQuizResult(string quizId, string username)
@@ -91,5 +94,6 @@ namespace wm_api.Controllers
             // Did we get a result?
             if (Result == null) return NotFound(); else return Ok(Result);
         }
+        #endregion
     }
 }

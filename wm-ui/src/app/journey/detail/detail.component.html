@@ -82,7 +82,7 @@
     <div id="journey-extras" class="col">
       <div id="journey-users">
         <h2>Trailblazers</h2>
-        <p>None</p>
+        <p *ngFor="let user of usersOnJourney">{{user.Username}}</p>
         <button id="sign-up" (click)="signOnToJourney()" *ngIf="!userSignedToJourney">Jump in!</button>
       </div>
       

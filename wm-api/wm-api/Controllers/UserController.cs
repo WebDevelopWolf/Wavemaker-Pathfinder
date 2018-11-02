@@ -12,6 +12,7 @@ namespace wm_api.Controllers
     {
         WmDataContext WmData = new WmDataContext();
 
+        #region GetUsers
         // Get Single User by Username
         [Route("User/{username}")]
         [HttpGet]
@@ -24,7 +25,7 @@ namespace wm_api.Controllers
             var SingleUser = WmData.Users.FirstOrDefault(u => u.Username == username);
 
             // Return the single user if found, if not return not found
-            if (SingleUser is null) return NotFound(); else return Ok(SingleUser); 
+            if (SingleUser is null) return NotFound(); else return Ok(SingleUser);
         }
 
         // Get Global User Leaderboard
@@ -69,5 +70,7 @@ namespace wm_api.Controllers
             // If the leaderboard has users then return
             if (AllUsers.Count > 0 && AllUsers != null) return Ok(AllUsers); else return NotFound();
         }
+        #endregion
+
     }
 }

@@ -247,6 +247,24 @@ namespace wm_api.Controllers
             // Return true (1) / false (0)
             return Ok(UserRegistered);
         }
+
+        // Get a list of Trailblazers on Journey
+        [Route("Journey/Users/{journeyId}")]
+        [HttpGet]
+        public IHttpActionResult GetUsersOnJourney (string journeyId)
+        {
+            // Make a new journey guid
+            Guid JourneyGuid = new Guid(journeyId);
+
+            // Make sure we have a journey guid
+            if (JourneyGuid == null) return NotFound();
+
+            // Get a list of users
+            List<UsersOnJourney> JourneyUsers = WmData.UsersOnJourneys.Where(u => u.JourneyId == JourneyGuid).ToList();
+
+            // If we have users then return them
+            if (JourneyUsers != null) return Ok(JourneyUsers); else return NotFound();
+        }
         #endregion
 
     }

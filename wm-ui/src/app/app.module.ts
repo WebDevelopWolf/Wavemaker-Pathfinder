@@ -20,6 +20,7 @@ import { ToastComponent } from './utils/toast/toast.component';
 import { EditComponent } from './educator/journey/edit/edit.component';
 import { AddQuizComponent } from './educator/quiz/add-quiz/add-quiz.component';
 import { DirectoryComponent } from './directory/directory.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { DirectoryComponent } from './directory/directory.component';
     ToastComponent,
     EditComponent,
     AddQuizComponent,
-    DirectoryComponent
+    DirectoryComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

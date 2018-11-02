@@ -13,6 +13,7 @@ namespace wm_api.Controllers
         WmDataContext WmData = new WmDataContext();
         _Utils Util = new _Utils();
 
+        #region Classes
         public class newAnswer
         {
             public string QuestionId { get; set; }
@@ -21,8 +22,10 @@ namespace wm_api.Controllers
             public string CorrectAnswer { get; set; }
             public string AnswerId { get; set; }
         }
+        #endregion
 
-        // Get an Overview of all Journeys
+        #region GetAnswers
+        // Get an Overview of all answers for one question
         [Route("Quiz/Question/Answers/{questionId}")]
         [HttpGet]
         public IHttpActionResult GetQuizQuestionsAnswersByQuestionId(string questionId)
@@ -40,7 +43,9 @@ namespace wm_api.Controllers
             // If we find an answer set then lets return it
             if (Answers != null) return Ok(Answers); else return NotFound();
         }
+        #endregion
 
+        #region PostAnswers
         // Add answers to question
         [Route("Quiz/Questions/Answers/Add")]
         [HttpPost]
@@ -69,5 +74,6 @@ namespace wm_api.Controllers
             // If we have Questions then return them, if not return Not Found
             return Ok("Answers Added");
         }
+        #endregion
     }
 }

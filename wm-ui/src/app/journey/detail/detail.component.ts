@@ -19,11 +19,13 @@ export class DetailComponent implements OnInit {
   lessons: any;
   relatedJourney: any;
   vidUrl: any;
+  usersOnJourney: any;
 
   ngOnInit() {
     this.getJourney();
     this.journeyLessons();
     this.getRelatedJourney();
+    this.journeyUsers();
   }
 
   // Get Journey Details
@@ -57,12 +59,20 @@ export class DetailComponent implements OnInit {
     .getService("Journey/TrailblazerRegistered/" + this.id + "/" + this._wmapi.tempuser)
     .then((result) => {
       if (result == 1) this.userSignedToJourney = true; else this.userSignedToJourney = false;
-      console.log(this.userSignedToJourney);
     })
     .catch(error => console.log(error));
   }
 
-  // TODO: Get registered Trailblazers
+  // Get registered Trailblazers
+  journeyUsers() {
+    this._wmapi
+    .getService("Journey/Users/" + this.id)
+    .then((result) => {
+      // Push Lessons to UI
+      this.usersOnJourney = result;
+    })
+    .catch(error => console.log(error));
+  }
   
   // Get Lesson List
   journeyLessons() {

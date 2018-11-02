@@ -38,7 +38,6 @@ export class EditComponent implements OnInit {
 
   // Single Journey From Select
   getJourney(journeyId: any) {
-    console.log("Journey ID: " + journeyId);
     this._wmapi
     .getService("Journey/" + journeyId.value)
     .then((result) => {
