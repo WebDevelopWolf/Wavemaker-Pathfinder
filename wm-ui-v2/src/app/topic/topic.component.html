@@ -26,20 +26,17 @@
     <!--Levels and Sessions Accordion-->
     <p class="para-title">Curriculum</p>
     <div id="accordion">
-      <div class="card">
+      <div class="card" *ngFor="let session of sessions | groupSessionByLevel:'LevelName'">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Beginner
-              <i class="fas fa-plus"></i>
+            <button class="btn btn-link" data-toggle="collapse" attr.data-target="#{{session.value.SessionOrder}}" aria-expanded="true" aria-controls="collapseOne">
+              {{session.key}}
             </button>
           </h5>
         </div>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div [id]="session.value.SessionOrder" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">
-            <button class="btn btn-lg btn-block">1. What is 3D Printing?</button>
-            <button class="btn btn-lg btn-block">2. Intro to Blender</button>
-            <button class="btn btn-lg btn-block">3. Your First Model</button>
+            <button class="btn btn-lg btn-block" *ngFor="let s of session.value">{{s.SessionOrder}}. {{s.SessionTitle}}</button>
           </div>
         </div>
       </div>

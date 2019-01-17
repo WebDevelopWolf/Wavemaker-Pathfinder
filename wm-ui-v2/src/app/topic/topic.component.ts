@@ -16,13 +16,14 @@ export class TopicComponent implements OnInit {
   private sub: any;
   topic: any;
   userSignedToJourney: boolean;
-  lessons: any;
+  sessions: any;
   relatedJourney: any;
   vidUrl: any;
   usersOnJourney: any;
 
   ngOnInit() {
     this.getTopic();
+    this.getSessions();
   }
 
   // Get Topic Details
@@ -35,6 +36,18 @@ export class TopicComponent implements OnInit {
         this.topic = result;
         //this.userRegisteredToJourney();
         this.vidUrl = this.sanitizer.bypassSecurityTrustResourceUrl(result.TopicVideo);
+      })
+      .catch(error => console.log(error));
+    });
+  }
+
+  getSessions() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id']; 
+      this._wmapi
+      .getService("Topic/Sessions/" + this.id)
+      .then((result) => {
+        this.sessions = result;
       })
       .catch(error => console.log(error));
     });

@@ -17,6 +17,7 @@ import { WmApiService } from './services/wm-api.service';
 import { UserDrawComponent } from './utilities/user-draw/user-draw.component';
 import { TopicfilterPipe } from './pipes/topicfilter.pipe';
 import { TopicComponent } from './topic/topic.component';
+import { GroupSessionByLevelPipe } from './pipes/group-session-by-level.pipe';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { TopicComponent } from './topic/topic.component';
     ResultComponent,
     UserDrawComponent,
     TopicfilterPipe,
-    TopicComponent
+    TopicComponent,
+    GroupSessionByLevelPipe
   ],
   imports: [
     BrowserModule,
