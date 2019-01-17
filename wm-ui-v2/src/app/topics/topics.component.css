@@ -1,0 +1,53 @@
+.input-search {
+    margin: 1em 0;
+}
+
+#topics {
+    border-top: 1px solid #ff4e00;
+}
+
+#topics {
+    padding: 1em 0;
+}
+
+.topic {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 1em;
+}
+
+.topic-image {
+    width: 300px;
+    padding: 0em;
+}
+
+.topic-detail {
+    position: relative;
+}
+
+.topic-detail h2 {
+    color: #ff4e00;
+    font-size: 2.2em;
+}
+
+.topic-detail span {
+    color: #FFFFFF;
+    font-size: 0.5em;
+}
+
+.topic-detail p {
+    letter-spacing: 0.075em;
+    text-align: justify;
+}
+
+.topic-ataglance {
+    position: absolute;
+    bottom: 0;
+    color: #ff4e00;
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.topic-ataglance i {
+    position: default;
+}

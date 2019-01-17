@@ -1,0 +1,56 @@
+<div id="content-container" class="row">
+
+    <!--Topic Wheel-->
+    <!-- TODO: Replace with JS Wheel-->
+    <div id="content-left" class="col-md-8 text-center">
+        <img id="wheel" src="assets/images/dashboard/Wheel.png" (click)="hideOverlay=!hideOverlay" />
+        <p class="text-left"><span>MyGroWave</span> by Wavemaker</p>
+    </div>
+    
+    <!--User & Navigation-->
+    <div id="content-right" class="col-md-4">
+        <div id="user" class="col-12">
+            <div class="text-center" id="user-avatar">
+                <img class="mx-auto d-block" [src]="userAvatar" />
+                <div class="middle">
+                    <i class="fas fa-camera-alt"></i>
+                    <p>Edit Avatar</p>
+                </div>
+            </div>
+            <p id="username" class="text-center"><span>Howdy </span>{{userProfile?.Username}}</p>
+            <div id="xp-bar" class="text-left">
+                <div id="xp" [style.width.%]="xpCalc"><p><i class="fas fa-stars"></i> XP</p></div>
+            </div>
+            <p id="stats" class="text-right">Level {{userProfile?.UserLevel}}</p>
+        </div>
+        <nav id="navigation">
+            <button type="button" class="btn btn-lg btn-block">Profile</button>
+            <button type="button" class="btn btn-lg btn-block">Resources</button>
+            <button type="button" class="btn btn-lg btn-block">Feedback</button>
+            <button type="button" class="btn btn-lg btn-block">Milestones</button>
+            <button type="button" class="btn btn-lg btn-block">Rewards</button>
+        </nav>
+    </div>
+
+    <!--Overlay -- Hidden by default-->
+    <div id="overlay" class="container-fluid" [hidden]="hideOverlay" (click)="hideOverlay=!hideOverlay">
+        <div id="overlay-inner" class="row h-100 justify-content-center align-items-center">
+            <div class="col-2 text-center">
+                <button><i class="fas fa-pencil-alt"></i></button>
+                <p>Edit</p>
+            </div>
+            <div class="col-2 text-center">
+                <button><i class="fas fa-paperclip"></i></button>
+                <p>Resources</p>
+            </div> 
+            <div class="col-2 text-center">
+                <button><i class="fas fa-trophy-alt"></i></button>    
+                <p>Rewards</p>
+            </div>
+            <div class="col-2 text-center">
+                <button><i class="fas fa-arrow-alt-right"></i></button>
+                <p>Continue</p>
+            </div>  
+        </div>  
+    </div>
+</div>

@@ -1,7 +1,0 @@
-<div id="quiz-container">
-  <h2>{{quiz.QuizTitle}}</h2>
-  <p>{{quiz.QuizInstructions}}</p>
-  <p *ngIf="test">This one is a test, so think carefully about your answers because you'll only get one shot at this one.</p>
-  <p>You need {{quiz.QuizPassMark}}% to pass this one!</p>
-  <button [routerLink]="['/quiz/question/', id]">Start Quiz</button>
-</div>

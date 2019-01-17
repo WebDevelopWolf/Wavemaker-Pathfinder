@@ -1,0 +1,55 @@
+<div id="content-container" class="row">
+
+  <!--Topic-->
+  <div id="content-left" class="col-md-10">
+    <h1>{{topic?.TopicTitle}}</h1>
+    <!--Topic Intro Video-->
+    <div class="videoWrapper">
+      <iframe width="560" height="349" [src]="vidUrl" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <!--Stats-->
+    <div id="stats" class="row">
+      <div class="col text-center"><i class="fas fa-award"></i> {{topic?.TopicBadges}} Badges</div>
+      <div class="col text-center"><i class="far fa-clock"></i> {{topic?.TopicCompletionTime}} Hours</div>
+      <div class="col text-center"><i class="fas fa-stars"></i> {{topic?.TopicXpReward}} XP</div>
+    </div>
+    <!--Topic Sign Up Button-->
+    <button id="sign-on" class="btn btn-lg btn-block">Sign Up!</button>
+    <!--Topic Description-->
+    <p id="description">{{topic?.TopicDescription}}</p>
+    <!--Topic Rewards-->
+    <p class="para-title">What can I win?</p>
+    <p id="rewards">{{topic?.TopicRewards}}</p>
+    <!--Topic Gains-->
+    <p class="para-title">What can I learn?</p>
+    <p id="gains">{{topic?.TopicGains}}</p>
+    <!--Levels and Sessions Accordion-->
+    <p class="para-title">Curriculum</p>
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Beginner
+              <i class="fas fa-plus"></i>
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            <button class="btn btn-lg btn-block">1. What is 3D Printing?</button>
+            <button class="btn btn-lg btn-block">2. Intro to Blender</button>
+            <button class="btn btn-lg btn-block">3. Your First Model</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--User & Navigation-->
+  <div id="content-right" class="col-md-2">
+      <app-user-draw></app-user-draw>
+  </div>
+  
+</div>
+

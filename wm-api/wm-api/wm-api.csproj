@@ -197,12 +197,13 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BadgeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JourneyController.cs" />
-    <Compile Include="Controllers\LessonController.cs" />
+    <Compile Include="Controllers\LevelsController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
     <Compile Include="Controllers\QuizQuestionAnswersController.cs" />
     <Compile Include="Controllers\QuizQuestionsController.cs" />
     <Compile Include="Controllers\QuizReviewController.cs" />
+    <Compile Include="Controllers\SessionsController.cs" />
+    <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\XpLevelsController.cs" />
     <Compile Include="Controllers\_Utils.cs" />

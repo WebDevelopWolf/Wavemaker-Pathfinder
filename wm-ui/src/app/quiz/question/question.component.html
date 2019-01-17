@@ -1,5 +1,0 @@
-<div id="question-container">
-  <p id="quiz-progression">Question {{currentQuestionNumber}} of {{noOfQuestions}}</p>
-  <p>{{currentQuestion?.QuestionText}}</p>
-  <button *ngFor="let answer of quizQuestionAnswers" (click)="answerQuestion(answer.CorrectAnswer, currentQuestion.QuestionScoreValue)">{{answer.Answer}}</button>
-</div>

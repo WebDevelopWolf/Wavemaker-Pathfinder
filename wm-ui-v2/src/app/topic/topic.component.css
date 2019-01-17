@@ -1,0 +1,79 @@
+#content-left {
+    overflow: auto;
+}
+
+h1 {
+    border-bottom: 0.25em solid #ff4e00;
+}
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; 
+    padding-top: 25px;
+    height: 0;
+    margin-bottom: 1em;
+}
+
+.videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#stats {
+    margin: 1em 0;
+}
+
+#stats div i {
+    color: #ff4e00;
+    margin-right: 5px;
+}
+
+#description, #rewards, #gains {
+    text-align: justify;
+    margin: 1em 0;
+}
+
+.para-title {
+    color: #ff4e00;
+    font-size: 1.2em;
+}
+
+.card {
+    border: 0;
+}
+
+.card-header { 
+    background: #c74005; 
+    border: 0;
+}
+
+.card-header button { 
+    color: #ffffff; 
+    text-align: left;
+}
+
+.card-header button:hover { 
+    color: #ffffff; 
+}
+
+.card-header button i {
+    float: right;
+}
+
+.card-body { 
+    background: #141915;
+    border: 0;
+    padding: 0;
+}
+
+.card-body button {
+    background: #FF834C;
+    color: #7F4226;
+    text-align: left;
+    border-radius: 0;
+    margin: 0;
+    font-size: 1em;
+}

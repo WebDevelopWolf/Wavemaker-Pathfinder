@@ -1,0 +1,31 @@
+<div id="content-container" class="row">
+
+  <!--Topics-->
+  <div id="content-left" class="col-md-10">
+      <h1>Let's Make Some Waves...</h1>
+      <input class="form-control form-control-lg input-search" [(ngModel)]="searchText" type="text" placeholder="Discover Something New...">
+      <div id="topics" class="col-md-12">
+        <div class="row topic" *ngFor="let topic of topics | topicfilter : searchText">
+          <div class="topic-image">
+            <img [src]="topic.TopicPreviewImage" />
+          </div>
+          <div class="col topic-detail">
+            <h2>{{topic.TopicTitle}} <span>{{topic.TopicTag}}</span></h2>
+            <p class="topic-description">{{topic.TopicDescription}}</p>
+            <p class="topic-ataglance">
+              <i class="fas fa-award"></i> {{topic.TopicBadges}} 
+              &nbsp;&nbsp;<span>·</span>&nbsp;&nbsp;
+              <i class="far fa-clock"></i> {{topic.TopicCompletionTime}} hrs 
+              &nbsp;&nbsp;<span>·</span>&nbsp;&nbsp; 
+              <i class="fas fa-stars"></i> {{topic.TopicXpReward}} xp
+            </p>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+  <!--User & Navigation-->
+  <div id="content-right" class="col-md-2">
+      <app-user-draw></app-user-draw>
+  </div>
+</div>
