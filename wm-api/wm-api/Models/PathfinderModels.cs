@@ -861,8 +861,7 @@ namespace wm_api.Models
         public string ResourceName { get; set; } // ResourceName (length: 50)
         public string ResourceType { get; set; } // ResourceType (length: 1)
         public string ResourceDescription { get; set; } // ResourceDescription (length: 250)
-        public System.Guid JourneyId { get; set; } // JourneyId
-        public System.Guid LessonId { get; set; } // LessonId
+        public System.Guid SessionId { get; set; } // SessionId
 
         public Resource()
         {
@@ -1404,8 +1403,7 @@ namespace wm_api.Models
             Property(x => x.ResourceName).HasColumnName(@"ResourceName").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
             Property(x => x.ResourceType).HasColumnName(@"ResourceType").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(1);
             Property(x => x.ResourceDescription).HasColumnName(@"ResourceDescription").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(250);
-            Property(x => x.JourneyId).HasColumnName(@"JourneyId").HasColumnType("uniqueidentifier").IsRequired();
-            Property(x => x.LessonId).HasColumnName(@"LessonId").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.SessionId).HasColumnName(@"SessionId").HasColumnType("uniqueidentifier").IsRequired();
         }
     }
 

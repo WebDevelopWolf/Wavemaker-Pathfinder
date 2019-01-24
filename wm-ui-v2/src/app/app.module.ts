@@ -18,6 +18,7 @@ import { UserDrawComponent } from './utilities/user-draw/user-draw.component';
 import { TopicfilterPipe } from './pipes/topicfilter.pipe';
 import { TopicComponent } from './topic/topic.component';
 import { GroupSessionByLevelPipe } from './pipes/group-session-by-level.pipe';
+import { SessionComponent } from './session/session.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { GroupSessionByLevelPipe } from './pipes/group-session-by-level.pipe';
     UserDrawComponent,
     TopicfilterPipe,
     TopicComponent,
-    GroupSessionByLevelPipe
+    GroupSessionByLevelPipe,
+    SessionComponent
   ],
   imports: [
     BrowserModule,

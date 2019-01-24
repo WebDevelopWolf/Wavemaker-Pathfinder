@@ -7,6 +7,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { QuestionComponent } from './question/question.component';
 import { ResultComponent } from './result/result.component';
 import { TopicComponent } from './topic/topic.component';
+import { SessionComponent } from './session/session.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch:'full'},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'quiz', component: QuizComponent },
   {path: 'question', component: QuestionComponent },
   {path: 'result', component: ResultComponent },
-  {path: 'topic/:id', component: TopicComponent }
+  {path: 'topic/:id', component: TopicComponent },
+  {path: 'session/:id', component: SessionComponent }
 ];
 
 @NgModule({

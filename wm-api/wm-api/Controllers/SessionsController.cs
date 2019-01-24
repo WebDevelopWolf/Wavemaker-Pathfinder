@@ -28,17 +28,45 @@ namespace wm_api.Controllers
         [HttpGet]
         public IHttpActionResult GetSessionsForTopic(string topicid)
         {
-            // Get Session Guid
-            Guid SessionGuid = new Guid(topicid);
+            // Get Topic Guid
+            Guid TopicGuid = new Guid(topicid);
 
             // Get all Sessions for a single topic, in correct order
             List<OrderedSessionList> Sessions = WmData.OrderedSessionLists
-                .Where(s => s.TopicId == SessionGuid)
+                .Where(s => s.TopicId == TopicGuid)
                 .OrderBy(s => s.SessionOrder)
                 .ToList();
 
             // If we have Sessions then return them, if not return Not Found
             if (Sessions != null) return Ok(Sessions); else return NotFound();
+        }
+
+        [Route("Session/{sessionid}")]
+        [HttpGet]
+        public IHttpActionResult GestSessionById(string sessionid)
+        {
+            // Get Session Guid
+            Guid SessionGuid = new Guid(sessionid);
+
+            // Get session details
+            Session CurrentSession = WmData.Sessions.FirstOrDefault(s => s.SessionId == SessionGuid);
+
+            // If we have a Session then return it, if not return Not Found
+            if (CurrentSession != null) return Ok(CurrentSession); else return NotFound();
+        }
+
+        [Route("Session/Resources/{sessionid}")]
+        [HttpGet]
+        public IHttpActionResult GetResourcesForSession(string sessionid)
+        {
+            // Get Session Guid
+            Guid SessionGuid = new Guid(sessionid);
+
+            // Get all Resources for a single Session
+            List<Resource> Resources = WmData.Resources.Where(r => r.SessionId == SessionGuid).ToList();
+
+            // If we have Resources then return them, if not return Not Found
+            if (Resources != null || Resources.Count > 0) return Ok(Resources); else return NotFound();
         }
         #endregion
     }

@@ -1,0 +1,38 @@
+<div class="pure-container" data-effect="pure-effect-push">
+  <input type="checkbox" id="pure-toggle-left" class="pure-toggle" data-toggle="left"/>
+  <label class="pure-toggle-label" for="pure-toggle-left" data-toggle-label="left"><span><i class="fas fa-bars"></i></span></label>
+
+  <nav class="pure-drawer" data-position="left">
+      <h1>What is 3D Printing?</h1>
+      <p>{{session?.SessionDescription}} {{session?.SessionGains}}</p>
+      <br />
+      <p class="session-title">Resources</p>
+      <div class="drawer-box">
+        <a *ngFor="let resource of sessionResources" href="{{resource.ResourceLocation}}"><i class="fas {{resource.ResourceIcon}} {{resource.ResourceClass}}"></i> {{resource.ResourceName}}<br /></a>
+      </div>
+      <br /><br />
+      <p class="session-title">Badges</p>
+      <div class="drawer-box">
+        <img title="Intro to 3D Printing" src="assets/badges/test-badge.png" />
+        <img title="Intro to 3D Printing" class="badge-not-earned" src="assets/badges/test-badge.png" />
+        <img title="Intro to 3D Printing" class="badge-not-earned" src="assets/badges/test-badge.png" />
+        <img title="Intro to 3D Printing" class="badge-not-earned" src="assets/badges/test-badge.png" />
+        <img title="Intro to 3D Printing" class="badge-not-earned" src="assets/badges/test-badge.png" />
+        <img title="Intro to 3D Printing" class="badge-not-earned" src="assets/badges/test-badge.png" />
+      </div>
+      <br /><br />
+      <p class="session-title">Think you're ready?</p>
+      <div class="drawer-box">
+        <button type="button" class="btn btn-lg btn-block">Take the Quiz</button>
+      </div>
+  </nav>   
+  
+  <div class="pure-pusher-container">
+      <div class="pure-pusher" *ngIf="vidUrl">
+          <!-- Copy & Pasted from YouTube -->
+          <iframe width="560" height="349" [src]="vidUrl" frameborder="0" allowfullscreen></iframe>
+      </div>
+  </div>
+  
+  <label class="pure-overlay" for="pure-toggle-left" data-overlay="left"></label> 
+</div>
