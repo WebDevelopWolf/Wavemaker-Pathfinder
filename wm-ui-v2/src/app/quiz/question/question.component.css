@@ -1,0 +1,12 @@
+#question {
+    font-size: 1.5em;
+}
+
+#quiz-progression {
+    color: #ff4e00;
+    font-size: 0.7em;
+}
+
+#question-container button {
+    margin-bottom: 2em;
+}

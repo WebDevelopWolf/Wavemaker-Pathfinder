@@ -1,0 +1,40 @@
+#toast {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 300px;
+    background:#44897A;
+    padding: 1em;
+}
+
+#icon-wrapper {
+    float: left;
+    width: 30%;
+    text-align: center;
+}
+
+i {
+    color: #0E5243;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+#text-wrapper {
+    float: right;
+    text-align: left;
+    width: 65%;
+}
+
+p {
+    color: #0E5243;
+    font-weight: bold;
+    margin: 0;
+}
+
+#toast-title {
+    font-size: 1em;
+}
+
+#toast-text {
+    font-size: 0.8em;
+}

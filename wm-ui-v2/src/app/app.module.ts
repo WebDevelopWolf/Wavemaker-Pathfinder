@@ -10,7 +10,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TopicsComponent } from './topics/topics.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { QuizComponent } from './quiz/quiz.component';
-import { QuestionComponent } from './question/question.component';
 import { ResultComponent } from './result/result.component';
 
 import { WmApiService } from './services/wm-api.service';
@@ -19,6 +18,10 @@ import { TopicfilterPipe } from './pipes/topicfilter.pipe';
 import { TopicComponent } from './topic/topic.component';
 import { GroupSessionByLevelPipe } from './pipes/group-session-by-level.pipe';
 import { SessionComponent } from './session/session.component';
+import { QuestionComponent } from './quiz/question/question.component';
+import { ReviewComponent } from './quiz/review/review.component';
+import { ToastComponent } from './utilities/toast/toast.component';
+import { BadgeService } from './services/badge-service.service';
 
 
 @NgModule({
@@ -28,13 +31,15 @@ import { SessionComponent } from './session/session.component';
     TopicsComponent,
     ResourcesComponent,
     QuizComponent,
-    QuestionComponent,
     ResultComponent,
     UserDrawComponent,
     TopicfilterPipe,
     TopicComponent,
     GroupSessionByLevelPipe,
-    SessionComponent
+    SessionComponent,
+    QuestionComponent,
+    ReviewComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,7 @@ import { SessionComponent } from './session/session.component';
     HttpModule,
     FormsModule
   ],
-  providers: [WmApiService],
+  providers: [WmApiService, BadgeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

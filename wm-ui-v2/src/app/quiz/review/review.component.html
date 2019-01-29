@@ -1,0 +1,20 @@
+<div id="content-container" class="row">
+
+  <!--Topics-->
+  <div id="content-left" class="col-md-10">
+    <div *ngIf="passed" class="results-container">
+      <h1>Congrats you passed!</h1>
+      <p>Your score is: {{result.QuizResultScore}}</p>
+    </div>
+    
+    <div *ngIf="!passed" class="results-container">
+      <h1>Hard luck, try again!</h1>
+      <p>Your score is: {{result.QuizResultScore}}</p>
+    </div>
+  </div>
+  
+  <!--User & Navigation-->
+  <div id="content-right" class="col-md-2">
+      <app-user-draw></app-user-draw>
+  </div>
+</div>
