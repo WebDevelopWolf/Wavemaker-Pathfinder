@@ -1,0 +1,31 @@
+<div id="content-container" class="row">
+
+  <!--Content Manager-->
+  <div id="content-left" class="col-md-10">
+    <h1>Content Manager</h1>
+    
+    <h2 class="sub-heading"><i class="fas fa-plus-hexagon"></i> Add a Topic</h2>
+    
+    <div id="successAlert" class="alert alert-success" *ngIf="topicSuccess" role="alert">
+      Topic Added!
+    </div>
+  
+    <input class="form-control form-control-lg input-style" id="topic-title" [(ngModel)]="TopicTitle" type="text" placeholder="First of all, What do you want to call your Topic?" />
+    <input class="form-control form-control-lg input-style" id="topic-tag" [(ngModel)]="TopicTag" type="text" placeholder="Sum up your topic in five words (or less)" />
+    <input class="form-control form-control-lg input-style" id="topic-description" [(ngModel)]="TopicDescription" type="text" placeholder="Tell us about your Topic (in 250 characters max)" />
+    <input class="form-control form-control-lg input-style" id="topic-video" [(ngModel)]="TopicIntroVideo" type="text" placeholder="Sounds great! Do you have a YouTube Video link so we can see more?" />
+    <input class="form-control form-control-lg input-style" id="topic-rewards" [(ngModel)]="TopicRewards" type="text" placeholder="Wow! Looks great! But what rewards can we earn from this Topic?" />
+    <input class="form-control form-control-lg input-style" id="topic-rewards" [(ngModel)]="TopicGains" type="text" placeholder="Cool! What about the extra knowledge I'll gain?" />
+    <input class="form-control form-control-lg input-style" id="topic-time" [(ngModel)]="TopicCompletionTime" type="text" placeholder="That sounds worth the effort, but hang on, how long will all this take?" />
+    <input class="form-control form-control-lg input-style" id="topic-xp" [(ngModel)]="TopicXpReward" type="text" placeholder="I'm sold! One last thing though, how much XP can I get for this Topic?" />
+  
+    <button id="addBtn" (click)="addTopic()">Add Topic</button>
+      
+  </div>
+  
+  <!--User & Navigation-->
+  <div id="content-right" class="col-md-2">
+      <app-user-draw></app-user-draw>
+  </div>
+  
+</div>

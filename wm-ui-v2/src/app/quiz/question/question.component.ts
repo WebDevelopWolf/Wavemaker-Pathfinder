@@ -19,9 +19,17 @@ export class QuestionComponent implements OnInit {
   quizQuestionAnswers: any;
   score: number;
   questions: any;
+  user: any;
+  loggedIn: any;
 
   ngOnInit() {
-    this.getQuizQuestions();
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.loggedIn = (this.user != null);
+    if (this.loggedIn) {
+      this.getQuizQuestions();
+    } else {
+      this.router.navigateByUrl('login');
+    }
   }
 
   // Get all the Quiz Questions

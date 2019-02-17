@@ -12,6 +12,13 @@ namespace wm_api.Controllers
     {
         WmDataContext WmData = new WmDataContext();
 
+        #region Classes
+        public class UserEmail
+        {
+            public string Email { get; set; }
+        }
+        #endregion
+
         #region GetUsers
         // Get Single User by Username
         [Route("User/{username}")]
@@ -23,6 +30,21 @@ namespace wm_api.Controllers
 
             // Get User from the database
             var SingleUser = WmData.Users.FirstOrDefault(u => u.Username == username);
+
+            // Return the single user if found, if not return not found
+            if (SingleUser is null) return NotFound(); else return Ok(SingleUser);
+        }
+
+        // Get Single User by Email
+        [Route("User/")]
+        [HttpPost]
+        public IHttpActionResult GetUserByEmail([FromBody] UserEmail useremail)
+        {
+            // Check if username is valid
+            if (useremail.Email is null || useremail.Email == "") return NotFound();
+
+            // Get User from the database
+            var SingleUser = WmData.Users.FirstOrDefault(u => u.UserEmail == useremail.Email);
 
             // Return the single user if found, if not return not found
             if (SingleUser is null) return NotFound(); else return Ok(SingleUser);
@@ -69,6 +91,27 @@ namespace wm_api.Controllers
 
             // If the leaderboard has users then return
             if (AllUsers.Count > 0 && AllUsers != null) return Ok(AllUsers); else return NotFound();
+        }
+
+        // Get User Type
+        [Route("User/Type")]
+        [HttpPost]
+        public IHttpActionResult GetUserType([FromBody] UserEmail useremail)
+        {
+            // Check if user's email is valid
+            if (useremail.Email is null || useremail.Email == "") return NotFound();
+
+            // Get the User
+            var RequestedUser = WmData.Users.FirstOrDefault(u => u.UserEmail == useremail.Email);
+
+            // Get the Type GUID
+            Guid? UserTypeID = RequestedUser.UserTypeId;
+
+            // Find User Type
+            UserType Type = WmData.UserTypes.FirstOrDefault(t => t.UserTypeId == UserTypeID);
+
+            // If we have a type then return it
+            if (Type != null) return Ok(Type.UserType_); else return NotFound();
         }
         #endregion
 

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HostListener } from '@angular/core';
 import { WmApiService } from '../services/wm-api.service';
+import { AuthService } from 'angularx-social-login';
+import { Router } from '@angular/router';
+import { LoginServiceService } from '../services/login-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,18 +12,24 @@ import { WmApiService } from '../services/wm-api.service';
 })
 export class DashboardComponent implements OnInit {
 
-  // TODO: Add Cookie Warning!
-
   hideOverlay = true;
   userProfile: any;
   userAvatar: string;
   xpCalc: number;
   leaderboardPos: any;
+  loggedIn: boolean;
+  user: any;
 
-  constructor(private _wmapi: WmApiService) { }
+  constructor(private _wmapi: WmApiService, private authService: AuthService, private router: Router, private _login: LoginServiceService) { }
 
   ngOnInit() {
-    this.getUserProfile();
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.loggedIn = (this.user != null);
+    if (this.loggedIn) {
+      this.getUserProfile(this.user);
+    } else {
+      this.router.navigateByUrl('login');
+    }
   }
 
   // Listen for the escape key
@@ -32,10 +41,10 @@ export class DashboardComponent implements OnInit {
   }
 
    // Fill the user profile information
-   getUserProfile() {
-    console.log("Logged in user:" + this._wmapi.tempuser);
+   getUserProfile(user: any) {
+    console.log("Logged in user: " + user.name.match(/\(([^)]+)\)/)[1]);
     this._wmapi
-    .getService("User/" + this._wmapi.tempuser)
+    .getService("User/" + user.name.match(/\(([^)]+)\)/)[1])
     .then((result) => {
       // Calculate the user XP
       this.calculateXP(result.UserLevel, result.UserXp);
@@ -43,7 +52,7 @@ export class DashboardComponent implements OnInit {
       this.getGlobalLeaderboardPos(result.Username);
       this.userProfile = result;
       // Set the user avatar
-      this.userAvatar = this._wmapi.tempuseravatar; 
+      this.userAvatar = user.photoUrl; 
     })
     .catch(error => console.log(error));
   }

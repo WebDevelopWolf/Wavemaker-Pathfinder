@@ -64,6 +64,7 @@ namespace wm_api.Models
         System.Data.Entity.DbSet<UsersOnJourney> UsersOnJourneys { get; set; } // UsersOnJourneys
         System.Data.Entity.DbSet<UsersOnTopic> UsersOnTopics { get; set; } // UsersOnTopics
         System.Data.Entity.DbSet<UserTopic> UserTopics { get; set; } // UserTopics
+        System.Data.Entity.DbSet<UserType> UserTypes { get; set; } // UserType
         System.Data.Entity.DbSet<XpLevel> XpLevels { get; set; } // XpLevels
 
         int SaveChanges();
@@ -114,6 +115,7 @@ namespace wm_api.Models
         public System.Data.Entity.DbSet<UsersOnJourney> UsersOnJourneys { get; set; } // UsersOnJourneys
         public System.Data.Entity.DbSet<UsersOnTopic> UsersOnTopics { get; set; } // UsersOnTopics
         public System.Data.Entity.DbSet<UserTopic> UserTopics { get; set; } // UserTopics
+        public System.Data.Entity.DbSet<UserType> UserTypes { get; set; } // UserType
         public System.Data.Entity.DbSet<XpLevel> XpLevels { get; set; } // XpLevels
 
         static WmDataContext()
@@ -191,6 +193,7 @@ namespace wm_api.Models
             modelBuilder.Configurations.Add(new UsersOnJourneyConfiguration());
             modelBuilder.Configurations.Add(new UsersOnTopicConfiguration());
             modelBuilder.Configurations.Add(new UserTopicConfiguration());
+            modelBuilder.Configurations.Add(new UserTypeConfiguration());
             modelBuilder.Configurations.Add(new XpLevelConfiguration());
         }
 
@@ -223,6 +226,7 @@ namespace wm_api.Models
             modelBuilder.Configurations.Add(new UsersOnJourneyConfiguration(schema));
             modelBuilder.Configurations.Add(new UsersOnTopicConfiguration(schema));
             modelBuilder.Configurations.Add(new UserTopicConfiguration(schema));
+            modelBuilder.Configurations.Add(new UserTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new XpLevelConfiguration(schema));
             return modelBuilder;
         }
@@ -273,6 +277,7 @@ namespace wm_api.Models
         public System.Data.Entity.DbSet<UsersOnJourney> UsersOnJourneys { get; set; }
         public System.Data.Entity.DbSet<UsersOnTopic> UsersOnTopics { get; set; }
         public System.Data.Entity.DbSet<UserTopic> UserTopics { get; set; }
+        public System.Data.Entity.DbSet<UserType> UserTypes { get; set; }
         public System.Data.Entity.DbSet<XpLevel> XpLevels { get; set; }
 
         public FakeWmDataContext()
@@ -308,6 +313,7 @@ namespace wm_api.Models
             UsersOnJourneys = new FakeDbSet<UsersOnJourney>("JourneyId", "Username");
             UsersOnTopics = new FakeDbSet<UsersOnTopic>("TopicId", "Username");
             UserTopics = new FakeDbSet<UserTopic>("UserTopicId");
+            UserTypes = new FakeDbSet<UserType>("UserTypeId");
             XpLevels = new FakeDbSet<XpLevel>("XpLevelId");
         }
 
@@ -841,15 +847,18 @@ namespace wm_api.Models
     public class Quizze
     {
         public System.Guid QuizId { get; set; } // QuizId (Primary key)
-        public System.Guid LessonId { get; set; } // LessonId
-        public string QuizTitle { get; set; } // QuizTitle (length: 100)
-        public string QuizInstructions { get; set; } // QuizInstructions
+        public string QuizTitle { get; set; } // QuizTitle (length: 50)
+        public string QuizInstructions { get; set; } // QuizInstructions (length: 250)
         public string QuizTest { get; set; } // QuizTest (length: 1)
         public int QuizPassMark { get; set; } // QuizPassMark
+        public System.Guid SessionId { get; set; } // SessionId
 
         public Quizze()
         {
-            QuizTest = "0";
+            QuizTitle = "";
+            QuizInstructions = "";
+            QuizTest = "N";
+            QuizPassMark = 0;
         }
     }
 
@@ -953,6 +962,7 @@ namespace wm_api.Models
         public int UserLevel { get; set; } // UserLevel
         public string UserFullName { get; set; } // UserFullName (length: 50)
         public string UserEmail { get; set; } // UserEmail (length: 150)
+        public System.Guid? UserTypeId { get; set; } // UserTypeId
 
         public User()
         {
@@ -1019,6 +1029,19 @@ namespace wm_api.Models
         public System.Guid UserId { get; set; } // UserId
         public System.Guid TopicId { get; set; } // TopicId
         public System.Guid LessonProgressId { get; set; } // LessonProgressId
+    }
+
+    // UserType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class UserType
+    {
+        public System.Guid UserTypeId { get; set; } // UserTypeId (Primary key)
+        public string UserType_ { get; set; } // UserType (length: 50)
+
+        public UserType()
+        {
+            UserType_ = "";
+        }
     }
 
     // XpLevels
@@ -1377,11 +1400,11 @@ namespace wm_api.Models
             HasKey(x => x.QuizId);
 
             Property(x => x.QuizId).HasColumnName(@"QuizId").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.LessonId).HasColumnName(@"LessonId").HasColumnType("uniqueidentifier").IsRequired();
-            Property(x => x.QuizTitle).HasColumnName(@"QuizTitle").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
-            Property(x => x.QuizInstructions).HasColumnName(@"QuizInstructions").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.QuizTitle).HasColumnName(@"QuizTitle").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.QuizInstructions).HasColumnName(@"QuizInstructions").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(250);
             Property(x => x.QuizTest).HasColumnName(@"QuizTest").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(1);
             Property(x => x.QuizPassMark).HasColumnName(@"QuizPassMark").HasColumnType("int").IsRequired();
+            Property(x => x.SessionId).HasColumnName(@"SessionId").HasColumnType("uniqueidentifier").IsRequired();
         }
     }
 
@@ -1516,6 +1539,7 @@ namespace wm_api.Models
             Property(x => x.UserLevel).HasColumnName(@"UserLevel").HasColumnType("int").IsRequired();
             Property(x => x.UserFullName).HasColumnName(@"UserFullName").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
             Property(x => x.UserEmail).HasColumnName(@"UserEmail").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(150);
+            Property(x => x.UserTypeId).HasColumnName(@"UserTypeId").HasColumnType("uniqueidentifier").IsOptional();
         }
     }
 
@@ -1637,6 +1661,25 @@ namespace wm_api.Models
             Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("uniqueidentifier").IsRequired();
             Property(x => x.TopicId).HasColumnName(@"TopicId").HasColumnType("uniqueidentifier").IsRequired();
             Property(x => x.LessonProgressId).HasColumnName(@"LessonProgressId").HasColumnType("uniqueidentifier").IsRequired();
+        }
+    }
+
+    // UserType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class UserTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<UserType>
+    {
+        public UserTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public UserTypeConfiguration(string schema)
+        {
+            ToTable("UserType", schema);
+            HasKey(x => x.UserTypeId);
+
+            Property(x => x.UserTypeId).HasColumnName(@"UserTypeId").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.UserType_).HasColumnName(@"UserType").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
         }
     }
 

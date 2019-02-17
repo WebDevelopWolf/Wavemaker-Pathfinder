@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Web.Http;
 using wm_api.Models;
 
@@ -16,12 +17,14 @@ namespace wm_api.Controllers
         public class NewTopic
         {
             public string TopicTitle { get; set; }
+            public string TopicTag { get; set; }
             public string TopicDescription { get; set; }
             public string TopicIntroVideo { get; set; }
             public string TopicRewards { get; set; }
             public string TopicGains { get; set; }
             public string TopicCompletionTime { get; set; }
             public Int32 TopicXpReward { get; set; }
+            public string TopicPreviewImage { get; set; }
             public string TopicId { get; set; }
         }
         #endregion
@@ -44,7 +47,9 @@ namespace wm_api.Controllers
             NewTopic.TopicTitle = newTopic.TopicTitle;
             NewTopic.TopicVideo = newTopic.TopicIntroVideo;
             NewTopic.TopicXpReward = newTopic.TopicXpReward;
-
+            NewTopic.TopicTag = newTopic.TopicTag;
+            NewTopic.TopicPreviewImage = newTopic.TopicPreviewImage;
+            
             // Add to database
             WmData.Topics.Add(NewTopic);
             WmData.SaveChanges();

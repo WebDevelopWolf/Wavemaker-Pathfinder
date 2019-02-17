@@ -58,14 +58,20 @@ button:hover {
     cursor: pointer;
 }
 
-.input-search {
+button:focus {
+    border-color: rgba(255, 78, 0, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 78, 0, 0.6);
+    outline: 0 none;
+}
+
+.input-search, .input-style {
     background:#242424;
     color: #ff4e00;
     border-radius: 0;
     border: 0;
 }
 
-.input-search:focus {
+.input-search:focus, .input-style:focus {
     background:#242424;
     color: #ff4e00;
     border-radius: 0;
@@ -73,7 +79,7 @@ button:hover {
     box-shadow: 0 0 0 0.2rem rgba(255, 78, 0, .25)
 }
 
-.input-search::placeholder {
+.input-search::placeholder, .input-style::placeholder {
     text-transform: uppercase;
     color: #141915;
 }

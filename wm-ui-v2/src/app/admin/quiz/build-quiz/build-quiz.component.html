@@ -1,0 +1,118 @@
+<div id="content-container" class="row">
+
+  <!--Content Manager-->
+  <div id="content-left" class="col-md-10">
+    <h1>Content Manager</h1>
+    
+    <h2 class="sub-heading"><i class="fas fa-plus-hexagon"></i> Build a New Quiz</h2>
+
+    <div id="successAlert" class="alert alert-success" *ngIf="quizSuccess" role="alert">
+      Quiz Added!
+    </div>
+
+    <!--Step 1: Quiz Basics-->
+    <div *ngIf="showQuiz" id="quiz">
+      <h2>Step One - Quiz Basics</h2>
+
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="session-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{topicFeedback}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a *ngFor="let topic of topics" class="dropdown-item" (click)="topicSelect(topic.TopicId, topic.TopicTitle)">{{topic.TopicTitle}}</a>
+        </div>
+      </div>
+  
+      <div class="dropdown" *ngIf="sessionLevelSuccess">
+        <button class="btn dropdown-toggle" type="button" id="session-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{levelFeedback}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" *ngFor="let level of levels" (click)="levelSelect(level.LevelId, level.LevelName)">{{level.LevelName}}</a>
+        </div>
+      </div>
+
+      <div class="dropdown" *ngIf="sessionSuccess">
+        <button class="btn dropdown-toggle" type="button" id="session-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{sessionFeedback}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a *ngFor="let session of sessions" class="dropdown-item" (click)="sessionSelect(session.SessionId, session.SessionTitle)">{{session.SessionTitle}}</a>
+        </div>
+      </div>
+      
+      <input class="form-control form-control-lg input-style" id="quiz-title" [(ngModel)]="QuizTitle" type="text" placeholder="Title of your quiz (e.g. 3D Printing Basics)" />
+      <input class="form-control form-control-lg input-style" id="quiz-instructions" [(ngModel)]="QuizInstructions" type="text" placeholder="Instructions for users (Tip: Give your users a reason to take this quiz)" />
+      <input class="form-control form-control-lg input-style" id="quiz-passmark" [(ngModel)]="QuizPassMark" type="text" placeholder="What's the pass mark for this quiz? (e.g. 100, 50, 25 etc.)" />
+      
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="session-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{testFeedback}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" (click)="testSelect('Y')">Yes</a>
+          <a class="dropdown-item" (click)="testSelect('N')">No</a>
+        </div>
+      </div>
+  
+      <button id="addBtn" (click)="addQuiz()">Done? Lets add some Questions <i class="fas fa-angle-right"></i></button>
+    </div>
+    
+    <!--Step 2: Set the Quiz Questions-->
+    <div *ngIf="showQuestions" id="questions">
+      <h2>Step 2 - Add Questions</h2>
+  
+      <div id="Question-Tip" class="alert alert-warning" role="alert">
+        Tip: Remember Question scores are stored in <strong>Percentages</strong>. This means your current quiz is <strong>{{ScoreSoFar}}%</strong> complete.
+      </div>
+  
+      <input class="form-control form-control-lg input-style" id="question-text" [(ngModel)]="QuestionText" type="text" placeholder="What is it you want to ask? (e.g. What is 3D Printing?)" />
+      <input class="form-control form-control-lg input-style" id="question-value" [(ngModel)]="QuestionValue" type="text" placeholder="What's this question value as a percentage? (We only need the value here i.e. 5, 10, 50)" />
+  
+      <button id="addQuestionBtn" (click)="addQuestion()">Add Another Question</button>
+      <button id="addLastQuestionBtn" (click)="addLastQuestion()">That all of them? Add some Answers <i class="fas fa-angle-right"></i></button>
+    </div>
+
+    <!--Step 3: Set the Quiz Answers-->
+  <div *ngIf="showAnswers" id="answers">
+    <h2>Step 3 - Add Question Answers</h2>
+
+    <div id="Answer-Tip" class="alert alert-warning" role="alert">
+      The number of answers for this question so far is: {{NoOfAnswers}}
+    </div>
+
+    <div class="dropdown">
+      <button class="btn dropdown-toggle" type="button" id="session-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{questionFeedback}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let question of QuestionsReturned" class="dropdown-item" (click)="setQuestionId(question.QuestionId, question.QuestionText)">{{question.QuestionText}}</a>
+      </div>
+    </div>
+
+    <input class="form-control form-control-lg input-style" id="answer-text" [(ngModel)]="Answer" type="text" placeholder="What is the answer text? (Tip: Make fake answers as convincing as possible)" />
+    <input class="form-control form-control-lg input-style" id="answer-advice" [(ngModel)]="AnswerAdvice" type="text" placeholder="Why is this answer right/wrong? (Tip: Provide some encouragement to keep going)" />
+
+    <div class="dropdown">
+      <button class="btn dropdown-toggle" type="button" id="session-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{answerFeedback}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" (click)="setAnswerCorrect('Y')">Correct</a>
+        <a class="dropdown-item" (click)="setAnswerCorrect('N')">Incorrect</a>
+      </div>
+    </div>
+
+    <button id="addBtn" (click)="addAnswers()">Add Answers to Question</button>
+    <button id="addBtn" (click)="addAnswersToDb()">Finished? Great! Complete the quiz!</button>
+  </div>
+  </div>
+
+  
+  
+  <!--User & Navigation-->
+  <div id="content-right" class="col-md-2">
+      <app-user-draw></app-user-draw>
+  </div>
+  
+</div>

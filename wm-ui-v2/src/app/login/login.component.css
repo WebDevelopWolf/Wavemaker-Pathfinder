@@ -1,0 +1,20 @@
+h1 {
+    border-bottom: 0.25em solid #ff4e00;
+}
+
+button {
+    margin-bottom: 1em;
+}
+
+.sub-heading {
+    border-bottom: 0.10em solid #ff4e00;
+}
+
+#last-login {
+    text-align: center;
+}
+
+#last-login img {
+    border-radius: 50%;
+    border: 3px solid #ff4e00;
+}

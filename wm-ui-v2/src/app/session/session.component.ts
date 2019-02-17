@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WmApiService } from '../services/wm-api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -10,16 +10,24 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class SessionComponent implements OnInit {
 
-  constructor(private _wmapi: WmApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { }
+  constructor(private _wmapi: WmApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router) { }
 
   id: number;
   private sub: any;
   session: any;
   vidUrl: any;
   sessionResources: any;
+  user: any;
+  loggedIn: any;
 
   ngOnInit() {
-    this.getCurrentSession();
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.loggedIn = (this.user != null);
+    if (this.loggedIn) {
+      this.getCurrentSession();
+    } else {
+      this.router.navigateByUrl('login');
+    }
   }
 
   // Get the Session from the URL ID

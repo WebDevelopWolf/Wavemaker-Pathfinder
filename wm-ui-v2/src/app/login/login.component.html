@@ -1,0 +1,21 @@
+<!--Content Manager-->
+<div id="content-left" class="col-md-12">
+  <h1><i class="fas fa-graduation-cap"></i> Welcome to MyGroWave!</h1>
+  
+  <h2 class="sub-heading">Login</h2>
+
+  <div *ngIf="loggedIn" id="last-login">
+      <img src="{{user?.photoUrl}}">
+      <div>
+        <h4>{{user?.name}}</h4>
+        <p>{{user?.email}}</p>
+      </div>
+      <button id="googleBtn" (click)="signOut()">Sign Out</button>
+  </div>
+  
+  <button id="googleBtn" *ngIf="!loggedIn" (click)="signInWithGoogle()"><i class="fab fa-google"></i> Login with Google</button>
+  <button *ngIf="loggedIn" (click)="signInWithGoogle()">Continue As {{user?.name}}</button>
+
+  
+</div>
+

@@ -1,0 +1,11 @@
+h1 {
+    border-bottom: 0.25em solid #ff4e00;
+}
+
+.sub-heading {
+    border-bottom: 0.10em solid #ff4e00;
+}
+
+input {
+    margin-bottom: 1.25em;
+}

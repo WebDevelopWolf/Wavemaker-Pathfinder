@@ -15,7 +15,7 @@ namespace wm_api.Controllers
         #region Classes
         public class NewQuiz
         {
-            public string LessonId { get; set; }
+            public string SessionId { get; set; }
             public string QuizTitle { get; set; }
             public string QuizInstructions { get; set; }
             public Int32 QuizPassMark { get; set; }
@@ -53,7 +53,7 @@ namespace wm_api.Controllers
             // Generate Quiz
             var NewQuiz = new Quizze();
             NewQuiz.QuizId = Guid.NewGuid();
-            NewQuiz.LessonId = new Guid(newQuiz.LessonId);
+            NewQuiz.SessionId = new Guid(newQuiz.SessionId);
             NewQuiz.QuizTitle = newQuiz.QuizTitle;
             NewQuiz.QuizInstructions = newQuiz.QuizInstructions;
             NewQuiz.QuizPassMark = newQuiz.QuizPassMark;

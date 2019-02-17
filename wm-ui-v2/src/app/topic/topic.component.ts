@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WmApiService } from '../services/wm-api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -10,7 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class TopicComponent implements OnInit {
 
-  constructor(private _wmapi: WmApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { }
+  constructor(private _wmapi: WmApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router) { }
 
   id: number;
   private sub: any;
@@ -20,10 +20,18 @@ export class TopicComponent implements OnInit {
   relatedJourney: any;
   vidUrl: any;
   usersOnJourney: any;
+  user: any;
+  loggedIn: boolean;
 
   ngOnInit() {
-    this.getTopic();
-    this.getSessions();
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.loggedIn = (this.user != null);
+    if (this.loggedIn) {
+      this.getTopic();
+      this.getSessions();
+    } else {
+      this.router.navigateByUrl('login');
+    }
   }
 
   // Get Topic Details

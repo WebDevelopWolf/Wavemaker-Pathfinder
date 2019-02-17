@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from "@angular/http";
 import { Router } from "@angular/router";
+import { AuthService } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
 
 declare const gapi: any;
 
@@ -9,19 +11,6 @@ export class WmApiService {
 
   //private _baseUrl = "http://wm-api.webdevelopwolf.com/"; // Test server api
   private _baseUrl = "http://localhost:58061/"; // Dev server api 
-  
-  // Default User Variables 
-  // TODO: Disable in Production
-  tempuser = "WebDevelopWolf";
-  tempuseravatar = "assets/users/av-lg/liane.png";
-  tempuserfullname = "Liane Stevenson";
-  tempuseremail = "webdevelopwolf@gmail.com"
-  
-  // Google Login Variables
-  //tempuser = localStorage.getItem('username');
-  //tempuseravatar = localStorage.getItem('useravatar');
-  //tempuserfullname = localStorage.getItem('userfullname');
-  //tempuseremail = localStorage.getItem('useremail');
 
   // Global API / Login Variables
   userloggedin = 0;
@@ -29,9 +18,32 @@ export class WmApiService {
   public auth2: any;
   userProfile: any;
   user: any;
+  loggedIn: boolean;
 
-  constructor(private _http: Http, private router: Router) {
+  // Default User Variables 
+  // TODO: Disable in Production
+  tempuser: string;
+  tempuseravatar: any;
+  tempuserfullname: any;
+  tempuseremail: any;
+
+  constructor(private _http: Http, private router: Router, private authService: AuthService) {
     console.log('Wavemaker API Initialized...');
+  }
+
+  // Get User Data
+  getLoggedInUser(): Promise<any> {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      if (this.loggedIn) {
+        this.tempuser = this.user;
+        this.tempuseravatar = this.user.photoUrl;
+        this.tempuserfullname = this.user.firstname + " " + this.user.surname;
+        this.tempuseremail = this.user.email;
+      }      
+    });
+    return this.user;
   }
 
   // On successful API call
@@ -64,44 +76,6 @@ export class WmApiService {
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);
-  }
-
-  // Initalise Google Sign-On
-  // NOTE: Currently registered to http://localhost:4200/ - will need to change when on server to final URL
-  public googleInit() {
-    gapi.load('auth2', () => {
-      this.auth2 = gapi.auth2.init({
-        client_id: '933803013928-4vvjqtql0nt7ve5upak2u5fhpa636ma0.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin',
-        scope: 'profile email',
-        prompt: 'select_account consent'
-      });
-      this.attachSignin(document.getElementById('googleBtn'));
-    });
-  }
-
-  // Log user in via Google OAuth 2
-  // NOTE: Not fully working - Page Refresh Bug - Possible Local Stoage Issue
-  public attachSignin(element) {
-    this.auth2.attachClickHandler(element, {},
-      (googleUser) => {
-        // Get profile from Google
-        let profile = googleUser.getBasicProfile();        
-        // Save user to the API until changed
-        // TODO: Store in Cookie
-        localStorage.setItem('username', profile.getEmail().substring(0, profile.getEmail().indexOf("@")));
-        localStorage.setItem('useravatar', profile.getImageUrl());
-        localStorage.setItem('userfullname', profile.getName());
-        localStorage.setItem('useremail', profile.getEmail());
-        // Log the user in
-        this.userloggedin = 1;
-        // Redirect to dashboard
-        this.router.navigate(['/dashboard']);
-      }, (error) => {
-        alert(JSON.stringify(error, undefined, 2));
-        // To get auth token - googleUser.getAuthResponse().id_token;
-        // To get user id - profile.getId();
-      });
   }
 
 }

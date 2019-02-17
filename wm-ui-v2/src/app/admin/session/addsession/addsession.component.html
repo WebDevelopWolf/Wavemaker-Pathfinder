@@ -1,0 +1,49 @@
+<div id="content-container" class="row">
+
+  <!--Content Manager-->
+  <div id="content-left" class="col-md-10">
+    <h1>Content Manager</h1>
+    
+    <h2 class="sub-heading"><i class="fas fa-plus-hexagon"></i> Add a Session</h2>
+    
+    <div id="successAlert" class="alert alert-success" *ngIf="sessionSuccess" role="alert">
+      Session Added!
+    </div>
+
+    <div class="dropdown">
+      <button class="btn dropdown-toggle" type="button" id="session-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{topicFeedback}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let topic of topics" class="dropdown-item" (click)="topicSelect(topic.TopicId, topic.TopicTitle)">{{topic.TopicTitle}}</a>
+      </div>
+    </div>
+
+    <div class="dropdown" *ngIf="sessionLevelSuccess">
+      <button class="btn dropdown-toggle" type="button" id="session-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{levelFeedback}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" *ngFor="let level of levels" (click)="levelSelect(level.LevelId, level.LevelName)">{{level.LevelName}}</a>
+      </div>
+    </div>
+  
+    <input class="form-control form-control-lg input-style" id="session-title" [(ngModel)]="SessionTitle" type="text" placeholder="First of all, What do you want to call your Session?" />
+    <input class="form-control form-control-lg input-style" id="session-description" [(ngModel)]="SessionDescription" type="text" placeholder="Tell us about your Session (in 250 characters max)" />
+    <input class="form-control form-control-lg input-style" id="session-video" [(ngModel)]="SessionVideo" type="text" placeholder="Sounds great! Do you have a YouTube Video link so we can see more?" />
+    <input class="form-control form-control-lg input-style" id="session-rewards" [(ngModel)]="SessionReward" type="text" placeholder="Wow! Looks great! But what rewards can we earn from this Session?" />
+    <input class="form-control form-control-lg input-style" id="session-rewards" [(ngModel)]="SessionGains" type="text" placeholder="Cool! What about the extra knowledge I'll gain?" />
+    <input class="form-control form-control-lg input-style" id="session-time" [(ngModel)]="SessionCompletionTime" type="text" placeholder="That sounds worth the effort, but hang on, how long will all this take?" />
+    <input class="form-control form-control-lg input-style" id="session-xp" [(ngModel)]="SessionXpReward" type="text" placeholder="I'm sold! One last thing though, how much XP can I get for this Session?" />
+    <input class="form-control form-control-lg input-style" id="session-order" [(ngModel)]="SessionOrder" type="text" placeholder="Finally, we just need to know where this session comes in the topic order" />
+    
+    <button id="addBtn" (click)="addSession()">Add Session</button>
+      
+  </div>
+  
+  <!--User & Navigation-->
+  <div id="content-right" class="col-md-2">
+      <app-user-draw></app-user-draw>
+  </div>
+  
+</div>

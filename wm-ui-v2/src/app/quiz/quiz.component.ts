@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WmApiService } from '../services/wm-api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz',
@@ -9,16 +9,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class QuizComponent implements OnInit {
 
-  constructor(private _wmapi: WmApiService, private route: ActivatedRoute) { }
+  constructor(private _wmapi: WmApiService, private route: ActivatedRoute, private router: Router) { }
 
   id: string;
   private sub: any;
   quiz: any;
   test: boolean;
   firstQuestion: any;
+  user: any;
+  loggedIn: any;
 
   ngOnInit() {
-    this.getQuiz();
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.loggedIn = (this.user != null);
+    if (this.loggedIn) {
+      this.getQuiz();
+    } else {
+      this.router.navigateByUrl('login');
+    }  
   }
 
   // Get Quiz Summary Details

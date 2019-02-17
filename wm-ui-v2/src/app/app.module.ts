@@ -10,7 +10,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TopicsComponent } from './topics/topics.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { QuizComponent } from './quiz/quiz.component';
-import { ResultComponent } from './result/result.component';
 
 import { WmApiService } from './services/wm-api.service';
 import { UserDrawComponent } from './utilities/user-draw/user-draw.component';
@@ -22,7 +21,25 @@ import { QuestionComponent } from './quiz/question/question.component';
 import { ReviewComponent } from './quiz/review/review.component';
 import { ToastComponent } from './utilities/toast/toast.component';
 import { BadgeService } from './services/badge-service.service';
+import { HomeComponent } from './admin/home/home.component';
+import { AddComponent } from './admin/topic/add/add.component';
+import { AddsessionComponent } from './admin/session/addsession/addsession.component';
+import { BuildQuizComponent } from './admin/quiz/build-quiz/build-quiz.component';
+import { LoginComponent } from './login/login.component';
 
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from "angularx-social-login";
+import { LoginServiceService } from './services/login-service.service';
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("933803013928-4vvjqtql0nt7ve5upak2u5fhpa636ma0.apps.googleusercontent.com")
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -31,7 +48,6 @@ import { BadgeService } from './services/badge-service.service';
     TopicsComponent,
     ResourcesComponent,
     QuizComponent,
-    ResultComponent,
     UserDrawComponent,
     TopicfilterPipe,
     TopicComponent,
@@ -39,15 +55,27 @@ import { BadgeService } from './services/badge-service.service';
     SessionComponent,
     QuestionComponent,
     ReviewComponent,
-    ToastComponent
+    ToastComponent,
+    HomeComponent,
+    AddComponent,
+    AddsessionComponent,
+    BuildQuizComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    SocialLoginModule
   ],
-  providers: [WmApiService, BadgeService],
+  providers: [
+    WmApiService, 
+    BadgeService,
+    LoginServiceService, {
+    provide: AuthServiceConfig,
+    useFactory: provideConfig
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

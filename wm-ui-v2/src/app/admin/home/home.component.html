@@ -1,0 +1,23 @@
+<div id="content-container" class="row">
+
+  <!--Content Manager-->
+  <div id="content-left" class="col-md-10">
+    <h1>Content Manager</h1>
+    
+    <h2 class="sub-heading"><i class="fas fa-plus-hexagon"></i> Add</h2>
+    <h2>Sessions & Topics</h2>
+    <button [routerLink]="['/admin/topic/add']">Add a New Topic</button>
+    <button [routerLink]="['/admin/session/add']">Add a New Session to a Topic</button>
+    <button [routerLink]="['/admin/quiz/build']">Build a New Quiz</button>
+    
+    <h2>Resources</h2>
+    <button [routerLink]="['/admin/resource/add']">Add a Resource</button>
+  </div>
+  
+  <!--User & Navigation-->
+  <div id="content-right" class="col-md-2">
+      <app-user-draw></app-user-draw>
+  </div>
+  
+</div>
+

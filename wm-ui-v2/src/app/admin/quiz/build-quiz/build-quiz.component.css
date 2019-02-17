@@ -1,0 +1,23 @@
+h1 {
+    border-bottom: 0.25em solid #ff4e00;
+}
+
+.sub-heading {
+    border-bottom: 0.10em solid #ff4e00;
+}
+
+input, button {
+    margin-bottom: 1.25em;
+}
+
+.dropdown-menu {
+    min-width: 100%;
+}
+
+.dropdown-menu a {
+    cursor: pointer;
+}
+
+button i {
+    margin-left: 0.25em;
+}
