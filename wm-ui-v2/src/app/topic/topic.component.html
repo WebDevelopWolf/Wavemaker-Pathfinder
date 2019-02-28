@@ -37,7 +37,7 @@
           </div>
           <div [id]="session.value.SessionOrder" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
-              <button class="btn btn-lg btn-block" *ngFor="let s of session.value">{{s.SessionOrder}}. {{s.SessionTitle}}</button>
+              <button [routerLink]="['/session', s.SessionId]" class="btn btn-lg btn-block" *ngFor="let s of session.value">{{s.SessionOrder}}. {{s.SessionTitle}}</button>
             </div>
           </div>
         </div>
