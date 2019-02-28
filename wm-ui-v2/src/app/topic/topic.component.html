@@ -14,7 +14,7 @@
       <div class="col text-center"><i class="fas fa-stars"></i> {{topic?.TopicXpReward}} XP</div>
     </div>
     <!--Topic Sign Up Button-->
-    <button id="sign-on" class="btn btn-lg btn-block">Sign Up!</button>
+    <button id="sign-on" class="btn btn-lg btn-block" (click)="signOnToTopic()" *ngIf="!userSignedToTopic">Sign Up!</button>
     <!--Topic Description-->
     <p id="description">{{topic?.TopicDescription}}</p>
     <!--Topic Rewards-->
@@ -24,23 +24,25 @@
     <p class="para-title">What can I learn?</p>
     <p id="gains">{{topic?.TopicGains}}</p>
     <!--Levels and Sessions Accordion-->
-    <p class="para-title">Curriculum</p>
-    <div id="accordion">
-      <div class="card" *ngFor="let session of sessions | groupSessionByLevel:'LevelName'">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" attr.data-target="#{{session.value.SessionOrder}}" aria-expanded="true" aria-controls="collapseOne">
-              {{session.key}}
-            </button>
-          </h5>
-        </div>
-        <div [id]="session.value.SessionOrder" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="card-body">
-            <button class="btn btn-lg btn-block" *ngFor="let s of session.value">{{s.SessionOrder}}. {{s.SessionTitle}}</button>
+    <div id="curriculum" *ngIf="userSignedToTopic">
+      <p class="para-title">Curriculum</p>
+      <div id="accordion">
+        <div class="card" *ngFor="let session of sessions | groupSessionByLevel:'LevelName'">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" attr.data-target="#{{session.value.SessionOrder}}" aria-expanded="true" aria-controls="collapseOne">
+                {{session.key}}
+              </button>
+            </h5>
+          </div>
+          <div [id]="session.value.SessionOrder" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <button class="btn btn-lg btn-block" *ngFor="let s of session.value">{{s.SessionOrder}}. {{s.SessionTitle}}</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </div>    
   </div>
   
   <!--User & Navigation-->

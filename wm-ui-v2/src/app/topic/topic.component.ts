@@ -15,9 +15,8 @@ export class TopicComponent implements OnInit {
   id: number;
   private sub: any;
   topic: any;
-  userSignedToJourney: boolean;
+  userSignedToTopic: boolean;
   sessions: any;
-  relatedJourney: any;
   vidUrl: any;
   usersOnJourney: any;
   user: any;
@@ -29,6 +28,7 @@ export class TopicComponent implements OnInit {
     if (this.loggedIn) {
       this.getTopic();
       this.getSessions();
+      this.userRegisteredToTopic();
     } else {
       this.router.navigateByUrl('login');
     }
@@ -59,6 +59,30 @@ export class TopicComponent implements OnInit {
       })
       .catch(error => console.log(error));
     });
+  }
+
+  // Register User to Topic
+  signOnToTopic() {
+    this._wmapi
+    .getService("Topic/Signon/" + this.id + "/" + this.user.name.match(/\(([^)]+)\)/)[1])
+    .then((result) => {
+      console.log(this.user.name.match(/\(([^)]+)\)/)[1] + " is registered to topic id " + this.id);
+      this.userSignedToTopic = true;
+      console.log(this.userSignedToTopic);
+    })
+    .catch(error => console.log(error));
+  }
+
+  // Check if User is already on Topic
+  userRegisteredToTopic() {
+    this._wmapi
+    .getService("Topic/UserRegistered/" + this.id + "/" + this.user.name.match(/\(([^)]+)\)/)[1])
+    .then((result) => {
+      console.log(result);
+      if (result == 1) this.userSignedToTopic = true; else this.userSignedToTopic = false;
+      console.log(this.userSignedToTopic);
+    })
+    .catch(error => console.log(error));
   }
 
 }
