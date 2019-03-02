@@ -103,7 +103,7 @@ export class QuestionComponent implements OnInit {
   completeQuiz() {
     // Add the users score to the Quiz Results
     this._wmapi
-      .getService("Quiz/Review/Add/" + this.id + "/" + this._wmapi.tempuser + "/" + this.score)
+      .getService("Quiz/Review/Add/" + this.id + "/" + this.user.name.match(/\(([^)]+)\)/)[1] + "/" + this.score)
       .then((result) => {
         // Navigate to review
         this.router.navigate(['/quiz/review/', this.id]);
