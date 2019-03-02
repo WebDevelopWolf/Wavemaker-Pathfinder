@@ -14,7 +14,7 @@
   </div>
   
   <button id="googleBtn" *ngIf="!loggedIn" (click)="signInWithGoogle()"><i class="fab fa-google"></i> Login with Google</button>
-  <button *ngIf="loggedIn" (click)="signInWithGoogle()">Continue As {{user?.name}}</button>
+  <button *ngIf="loggedIn" (click)="continue()">Continue As {{user?.name}}</button>
 
   
 </div>
