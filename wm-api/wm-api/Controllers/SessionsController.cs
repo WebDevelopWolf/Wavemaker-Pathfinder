@@ -133,6 +133,20 @@ namespace wm_api.Controllers
             // If we have Resources then return them, if not return Not Found
             if (Resources != null || Resources.Count > 0) return Ok(Resources); else return NotFound();
         }
+
+        [Route("Session/Quiz/{sessionid}")]
+        [HttpGet]
+        public IHttpActionResult GetQuizForSession(string sessionid)
+        {
+            // Get Session Guid
+            Guid SessionGuid = new Guid(sessionid);
+
+            // Get all Resources for a single Session
+            Quizze Quiz = WmData.Quizzes.FirstOrDefault(r => r.SessionId == SessionGuid);
+
+            // If we have Resources then return them, if not return Not Found
+            if (Quiz != null) return Ok(Quiz); else return NotFound();
+        }
         #endregion
     }
 }

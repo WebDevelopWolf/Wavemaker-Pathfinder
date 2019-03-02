@@ -19,6 +19,7 @@ export class SessionComponent implements OnInit {
   sessionResources: any;
   user: any;
   loggedIn: any;
+  sessionQuiz: any;
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -76,6 +77,16 @@ export class SessionComponent implements OnInit {
               break;
           }
         });
+      })
+      .catch(error => console.log(error));
+  }
+
+  getSessionQuiz() {
+    this._wmapi
+      .getService("Session/Quiz/" + this.session.SessionId)
+      .then((result) => {
+        this.sessionQuiz = result;
+        this.router.navigateByUrl("/quiz/" + this.sessionQuiz.QuizId);
       })
       .catch(error => console.log(error));
   }
